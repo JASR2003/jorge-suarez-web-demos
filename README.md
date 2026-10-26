@@ -27,5 +27,5 @@ npm run build
 
 Netlify toma la configuración desde `netlify.toml`, ejecuta `npm run build` y publica el directorio `dist`.
 
-La primera demostración planificada es un sitio para restaurante o cafetería.
+La página principal funciona como catálogo de ideas candidatas. Las demostraciones se añadirán como entradas multipágina independientes a medida que se seleccionen y desarrollen.
 

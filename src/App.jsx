@@ -1,37 +1,177 @@
-import { ArrowUpRight } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowDownRight, ArrowUpRight, Check, Sparkles } from 'lucide-react'
+import { DemoCard } from './components/DemoCard.jsx'
+import { demoFilters, demoIdeas } from './data/demos.js'
+
+const principles = [
+  {
+    number: '01',
+    title: 'Una necesidad real',
+    description: 'Cada demo parte de una decisión comercial concreta: reservar, vender, explicar, comparar o contactar.',
+  },
+  {
+    number: '02',
+    title: 'Una identidad propia',
+    description: 'La estructura, el contenido y el lenguaje visual cambian con el negocio. No son variaciones de una sola plantilla.',
+  },
+  {
+    number: '03',
+    title: 'Calidad de producción',
+    description: 'Responsive, accesibilidad, rendimiento y SEO forman parte del concepto desde el primer componente.',
+  },
+]
+
+const process = [
+  ['Entender', 'Objetivo, público y acción principal.'],
+  ['Dirigir', 'Contenido, estructura y sistema visual.'],
+  ['Construir', 'Interfaz responsive e interacciones útiles.'],
+  ['Validar', 'Accesibilidad, rendimiento y claridad.'],
+]
 
 function App() {
-  return (
-    <main className="min-h-screen bg-slate-950 px-6 py-16 text-slate-100">
-      <section className="mx-auto flex min-h-[calc(100vh-8rem)] max-w-5xl flex-col justify-between rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-14">
-        <div className="flex items-center justify-between gap-6 text-sm text-slate-400">
-          <span>Jorge Suárez</span>
-          <span>Web Demos</span>
-        </div>
+  const [activeFilter, setActiveFilter] = useState('all')
 
-        <div className="max-w-3xl py-20">
-          <p className="mb-6 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
-            Catálogo en construcción
-          </p>
-          <h1 className="text-5xl font-semibold tracking-[-0.06em] text-balance md:text-8xl">
-            Sitios pensados para objetivos comerciales reales.
-          </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">
-            Próximamente encontrarás demostraciones independientes para restaurantes, clínicas,
-            productos digitales, inmobiliarias y tiendas.
-          </p>
-        </div>
+  const visibleDemos = activeFilter === 'all'
+    ? demoIdeas
+    : demoIdeas.filter((demo) => demo.focus === activeFilter)
+
+  return (
+    <div className="site-shell">
+      <a className="skip-link" href="#contenido">Saltar al contenido</a>
+
+      <header className="site-header">
+        <a className="brand" href="#inicio" aria-label="Jorge Suárez Web Demos, ir al inicio">
+          <span>JS</span>
+          <span>Web Demos</span>
+        </a>
+
+        <nav aria-label="Navegación principal">
+          <a href="#catalogo">Ideas</a>
+          <a href="#criterios">Criterios</a>
+          <a href="#proceso">Proceso</a>
+        </nav>
 
         <a
-          className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-cyan-300 transition-colors hover:text-cyan-200"
-          href="https://github.com/JASR2003"
+          className="header-link"
+          href="https://github.com/JASR2003/jorge-suarez-web-demos"
           rel="noreferrer"
           target="_blank"
         >
-          Ver GitHub <ArrowUpRight aria-hidden="true" className="size-4" />
+          Repositorio <ArrowUpRight aria-hidden="true" />
         </a>
-      </section>
-    </main>
+      </header>
+
+      <main id="contenido">
+        <section className="hero" id="inicio" aria-labelledby="hero-title">
+          <div className="hero-copy">
+            <p className="eyebrow"><Sparkles aria-hidden="true" /> Laboratorio web · Colección 2026</p>
+            <h1 id="hero-title">Una colección de sitios que <em>no se repiten.</em></h1>
+            <p className="hero-lead">
+              Conceptos digitales creados para distintos negocios, públicos y objetivos. Cada demo busca demostrar una solución, no cambiarle el color a la misma página.
+            </p>
+            <div className="hero-actions">
+              <a className="primary-action" href="#catalogo">Explorar ideas <ArrowDownRight aria-hidden="true" /></a>
+              <a className="text-action" href="#criterios">Conocer el criterio</a>
+            </div>
+          </div>
+
+          <div className="hero-board" aria-label="Principios de la colección">
+            <div className="board-index">00 / MANIFIESTO</div>
+            <div className="board-word board-word-one">NEGOCIO</div>
+            <div className="board-word board-word-two">DISEÑO</div>
+            <div className="board-word board-word-three">FUNCIÓN</div>
+            <div className="board-seal" aria-hidden="true"><span>JS</span><small>WEB LAB</small></div>
+            <p>Cada industria merece una respuesta digital construida alrededor de su realidad.</p>
+          </div>
+        </section>
+
+        <section className="quality-strip" aria-label="Características de las demostraciones">
+          {['Diseño específico', 'Responsive real', 'Accesibilidad', 'Rendimiento', 'SEO técnico'].map((item) => (
+            <span key={item}><Check aria-hidden="true" /> {item}</span>
+          ))}
+        </section>
+
+        <section className="catalog-section" id="catalogo" aria-labelledby="catalog-title">
+          <div className="section-intro">
+            <p className="section-number">01 / Ideas candidatas</p>
+            <div>
+              <h2 id="catalog-title">Las próximas demos pueden salir de aquí.</h2>
+              <p>Este catálogo empieza como un mapa de posibilidades. Elegiremos las propuestas con mayor valor comercial y técnico para convertirlas en sitios completos.</p>
+            </div>
+          </div>
+
+          <div className="catalog-toolbar">
+            <div className="filter-list" aria-label="Filtrar ideas">
+              {demoFilters.map((filter) => (
+                <button
+                  aria-pressed={activeFilter === filter.id}
+                  className={activeFilter === filter.id ? 'is-active' : ''}
+                  key={filter.id}
+                  onClick={() => setActiveFilter(filter.id)}
+                  type="button"
+                >
+                  {filter.label}
+                </button>
+              ))}
+            </div>
+            <p aria-live="polite">{visibleDemos.length} conceptos</p>
+          </div>
+
+          <div className="demo-grid">
+            {visibleDemos.map((demo) => <DemoCard demo={demo} key={demo.slug} />)}
+          </div>
+        </section>
+
+        <section className="principles-section" id="criterios" aria-labelledby="principles-title">
+          <div className="section-intro section-intro-light">
+            <p className="section-number">02 / Criterio</p>
+            <div>
+              <h2 id="principles-title">Una demo debe parecer una decisión, no un ejercicio.</h2>
+              <p>La colección solo tendrá piezas capaces de explicar cómo pienso el diseño y cómo lo convierto en una experiencia funcional.</p>
+            </div>
+          </div>
+
+          <div className="principles-grid">
+            {principles.map((principle) => (
+              <article key={principle.number}>
+                <span>{principle.number}</span>
+                <h3>{principle.title}</h3>
+                <p>{principle.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="process-section" id="proceso" aria-labelledby="process-title">
+          <div className="process-heading">
+            <p className="section-number">03 / Método</p>
+            <h2 id="process-title">De una industria a una experiencia propia.</h2>
+          </div>
+
+          <ol className="process-list">
+            {process.map(([title, description], index) => (
+              <li key={title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="closing-section">
+          <p>La colección comienza aquí.</p>
+          <h2>Ahora elegiremos cuál merece ser la primera.</h2>
+          <a href="#catalogo">Volver a las ideas <ArrowUpRight aria-hidden="true" /></a>
+        </section>
+      </main>
+
+      <footer>
+        <div><strong>JS / WEB DEMOS</strong><span>Conceptos digitales para problemas reales.</span></div>
+        <span>© {new Date().getFullYear()} Jorge Suárez</span>
+        <a href="https://github.com/JASR2003" rel="noreferrer" target="_blank">GitHub <ArrowUpRight aria-hidden="true" /></a>
+      </footer>
+    </div>
   )
 }
 
