@@ -115,6 +115,7 @@ export default function RestauranteDemo() {
   const [guests, setGuests] = useState(2)
   const [selectedDate, setSelectedDate] = useState(reservationDates[0].id)
   const [selectedTime, setSelectedTime] = useState('')
+  const [bookingStep, setBookingStep] = useState(1)
   const [reservationComplete, setReservationComplete] = useState(false)
 
   const selectedDateLabel = reservationDates.find((date) => date.id === selectedDate)?.full
@@ -138,6 +139,7 @@ export default function RestauranteDemo() {
     setGuests(2)
     setSelectedDate(reservationDates[0].id)
     setSelectedTime('')
+    setBookingStep(1)
     setReservationComplete(false)
   }
 
@@ -303,73 +305,109 @@ export default function RestauranteDemo() {
               <li>Grupos mayores se coordinan por correo</li>
             </ul>
           </div>
-          {reservationComplete ? (
-            <div className="restaurant-confirmation" aria-live="polite">
-              <span><Check aria-hidden="true" /></span>
-              <p>Solicitud simulada</p>
-              <h3>Tu mesa está preparada en esta demostración.</h3>
-              <dl>
-                <div><dt>Fecha</dt><dd>{selectedDateLabel}</dd></div>
-                <div><dt>Hora</dt><dd>{reservationTimes.find((time) => time.value === selectedTime)?.label}</dd></div>
-                <div><dt>Mesa</dt><dd>{guests} {guests === 1 ? 'persona' : 'personas'}</dd></div>
-              </dl>
-              <p>No se envió ni almacenó ninguna información. En un proyecto real, este paso se conectaría con el sistema de reservas del restaurante.</p>
-              <button type="button" onClick={resetReservation}>Hacer otra simulación</button>
-            </div>
-          ) : (
-            <form className="restaurant-booking-form" onSubmit={handleReservation}>
-              <fieldset>
-                <legend><span>01</span><Users aria-hidden="true" /> ¿Cuántas personas?</legend>
-                <div className="restaurant-guest-options">
-                  {[1, 2, 3, 4, 5, 6].map((amount) => (
-                    <button aria-pressed={guests === amount} key={amount} onClick={() => setGuests(amount)} type="button">{amount}</button>
-                  ))}
+          <div className="restaurant-booking-panel">
+            {reservationComplete ? (
+              <div className="restaurant-confirmation" aria-live="polite">
+                <span><Check aria-hidden="true" /></span>
+                <p>Solicitud simulada</p>
+                <h3>Tu mesa está preparada en esta demostración.</h3>
+                <dl>
+                  <div><dt>Fecha</dt><dd>{selectedDateLabel}</dd></div>
+                  <div><dt>Hora</dt><dd>{reservationTimes.find((time) => time.value === selectedTime)?.label}</dd></div>
+                  <div><dt>Mesa</dt><dd>{guests} {guests === 1 ? 'persona' : 'personas'}</dd></div>
+                </dl>
+                <p>No se envió ni almacenó ninguna información. En un proyecto real, este paso se conectaría con el sistema de reservas del restaurante.</p>
+                <button type="button" onClick={resetReservation}>Hacer otra simulación</button>
+              </div>
+            ) : (
+              <form className="restaurant-booking-form" onSubmit={handleReservation}>
+                <div className="restaurant-booking-progress">
+                  <p>Paso {bookingStep} de 4</p>
+                  <ol aria-label="Progreso de la reserva">
+                    {['Personas', 'Fecha', 'Hora', 'Contacto'].map((label, index) => (
+                      <li className={bookingStep === index + 1 ? 'is-current' : bookingStep > index + 1 ? 'is-complete' : ''} key={label}>
+                        <span>{bookingStep > index + 1 ? <Check aria-hidden="true" /> : index + 1}</span>{label}
+                      </li>
+                    ))}
+                  </ol>
                 </div>
-              </fieldset>
 
-              <fieldset>
-                <legend><span>02</span><CalendarDays aria-hidden="true" /> Elige una fecha</legend>
-                <div className="restaurant-date-options">
-                  {reservationDates.map((date) => (
-                    <button aria-pressed={selectedDate === date.id} key={date.id} onClick={() => { setSelectedDate(date.id); setSelectedTime('') }} type="button">
-                      <small>{date.day}</small><strong>{date.number}</strong><span>{date.month}</span>
+                <div className="restaurant-booking-summary" aria-label="Resumen de la reserva">
+                  <span><Users aria-hidden="true" />{guests} {guests === 1 ? 'persona' : 'personas'}</span>
+                  <span><CalendarDays aria-hidden="true" />{selectedDateLabel}</span>
+                  <span><Clock3 aria-hidden="true" />{selectedTime ? reservationTimes.find((time) => time.value === selectedTime)?.label : 'Hora pendiente'}</span>
+                </div>
+
+                {bookingStep === 1 && (
+                  <fieldset className="restaurant-booking-step">
+                    <legend><span>01</span><strong>¿Para cuántas personas?</strong><small>Selecciona el tamaño de tu mesa.</small></legend>
+                    <div className="restaurant-guest-options">
+                      {[1, 2, 3, 4, 5, 6].map((amount) => (
+                        <button aria-pressed={guests === amount} key={amount} onClick={() => setGuests(amount)} type="button">
+                          <strong>{amount}</strong><small>{amount === 1 ? 'persona' : 'personas'}</small>
+                        </button>
+                      ))}
+                    </div>
+                  </fieldset>
+                )}
+
+                {bookingStep === 2 && (
+                  <fieldset className="restaurant-booking-step">
+                    <legend><span>02</span><strong>¿Qué día vienes?</strong><small>Mostramos los próximos siete días disponibles.</small></legend>
+                    <div className="restaurant-date-options">
+                      {reservationDates.map((date) => (
+                        <button aria-pressed={selectedDate === date.id} key={date.id} onClick={() => { setSelectedDate(date.id); setSelectedTime('') }} type="button">
+                          <small>{date.day}</small><strong>{date.number}</strong><span>{date.month}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </fieldset>
+                )}
+
+                {bookingStep === 3 && (
+                  <fieldset className="restaurant-booking-step">
+                    <legend><span>03</span><strong>Elige una hora</strong><small>Los horarios tachados ya no están disponibles.</small></legend>
+                    <div className="restaurant-time-options">
+                      {reservationTimes.map((time) => (
+                        <button
+                          aria-pressed={selectedTime === time.value}
+                          disabled={time.unavailable}
+                          key={time.value}
+                          onClick={() => setSelectedTime(time.value)}
+                          type="button"
+                        >
+                          {time.label}{time.unavailable && <small>Completo</small>}
+                        </button>
+                      ))}
+                    </div>
+                  </fieldset>
+                )}
+
+                {bookingStep === 4 && (
+                  <fieldset className="restaurant-booking-step">
+                    <legend><span>04</span><strong>¿A nombre de quién?</strong><small>Completa los datos para simular la confirmación.</small></legend>
+                    <div className="restaurant-contact-fields">
+                      <label>Nombre<input autoComplete="name" name="name" placeholder="Tu nombre" required /></label>
+                      <label>Correo<input autoComplete="email" name="email" placeholder="correo@ejemplo.com" required type="email" /></label>
+                      <label className="restaurant-wide-field">Nota opcional<textarea name="note" placeholder="Alergias, celebración o información útil" rows="3" /></label>
+                    </div>
+                  </fieldset>
+                )}
+
+                <div className="restaurant-booking-actions">
+                  {bookingStep > 1 && <button className="restaurant-back" onClick={() => setBookingStep((step) => step - 1)} type="button">Volver</button>}
+                  {bookingStep < 4 ? (
+                    <button className="restaurant-next" disabled={bookingStep === 3 && !selectedTime} onClick={() => setBookingStep((step) => step + 1)} type="button">
+                      Continuar <ArrowRight aria-hidden="true" />
                     </button>
-                  ))}
+                  ) : (
+                    <button className="restaurant-next" type="submit">Confirmar simulación <ArrowRight aria-hidden="true" /></button>
+                  )}
                 </div>
-              </fieldset>
-
-              <fieldset>
-                <legend><span>03</span><Clock3 aria-hidden="true" /> Horarios disponibles</legend>
-                <div className="restaurant-time-options">
-                  {reservationTimes.map((time) => (
-                    <button
-                      aria-pressed={selectedTime === time.value}
-                      disabled={time.unavailable}
-                      key={time.value}
-                      onClick={() => setSelectedTime(time.value)}
-                      type="button"
-                    >
-                      {time.label}{time.unavailable && <small>Completo</small>}
-                    </button>
-                  ))}
-                </div>
-              </fieldset>
-
-              <fieldset>
-                <legend><span>04</span> Datos de contacto</legend>
-                <div className="restaurant-contact-fields">
-                  <label>Nombre<input autoComplete="name" name="name" placeholder="Tu nombre" required /></label>
-                  <label>Correo<input autoComplete="email" name="email" placeholder="correo@ejemplo.com" required type="email" /></label>
-                  <label className="restaurant-wide-field">Nota opcional<textarea name="note" placeholder="Alergias, celebración o información útil" rows="3" /></label>
-                </div>
-              </fieldset>
-
-              <button className="restaurant-submit" disabled={!selectedTime} type="submit">
-                {selectedTime ? 'Simular reserva' : 'Elige un horario'} <ArrowRight aria-hidden="true" />
-              </button>
-              <p className="restaurant-reservation-note">Demostración interactiva: los datos no salen de tu navegador y no se almacenan.</p>
-            </form>
-          )}
+                <p className="restaurant-reservation-note">Demostración interactiva: los datos no salen de tu navegador y no se almacenan.</p>
+              </form>
+            )}
+          </div>
         </section>
       </main>
 
