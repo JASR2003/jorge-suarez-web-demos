@@ -200,12 +200,23 @@
 .restaurant-booking-step legend > span { grid-row: 1 / 3; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #ded6c8; color: var(--clay); font-size: .75rem; font-weight: 750; }
 .restaurant-booking-step legend > strong { font: 520 clamp(2rem, 3vw, 2.8rem)/1 'Bodoni Moda Variable', serif; letter-spacing: -.035em; }
 .restaurant-booking-step legend > small { grid-column: 2; color: #6f675e; font-size: .82rem; font-weight: 450; letter-spacing: 0; }
-.restaurant-booking-panel .restaurant-guest-options { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.restaurant-booking-panel .restaurant-guest-options button { display: grid; place-items: center; gap: 4px; min-height: 92px; aspect-ratio: auto; border-color: rgb(23 19 15 / 28%); color: var(--coal); }
-.restaurant-booking-panel .restaurant-guest-options button strong { font: 520 1.65rem 'Bodoni Moda Variable', serif; }
-.restaurant-booking-panel .restaurant-guest-options button small { color: #766e64; font-size: .72rem; }
-.restaurant-booking-panel .restaurant-guest-options button:hover, .restaurant-booking-panel .restaurant-guest-options button[aria-pressed='true'], .restaurant-booking-panel .restaurant-date-options button:hover, .restaurant-booking-panel .restaurant-date-options button[aria-pressed='true'], .restaurant-booking-panel .restaurant-time-options button:hover, .restaurant-booking-panel .restaurant-time-options button[aria-pressed='true'] { border-color: var(--clay); background: var(--clay); color: white; }
-.restaurant-booking-panel .restaurant-guest-options button[aria-pressed='true'] small { color: #f5d8ca; }
+.restaurant-guest-picker { display: grid; grid-template-columns: 72px minmax(180px, 1fr) 72px; max-width: 520px; border: 1px solid rgb(23 19 15 / 30%); }
+.restaurant-guest-picker > button { border: 0; background: transparent; color: var(--coal); cursor: pointer; font: 400 2rem 'Instrument Sans Variable', sans-serif; }
+.restaurant-guest-picker > button:first-child { border-right: 1px solid rgb(23 19 15 / 24%); }
+.restaurant-guest-picker > button:last-child { border-left: 1px solid rgb(23 19 15 / 24%); }
+.restaurant-guest-picker > button:hover:not(:disabled) { background: var(--clay); color: white; }
+.restaurant-guest-picker > button:disabled { cursor: not-allowed; opacity: .25; }
+.restaurant-guest-picker label { display: grid; grid-template-columns: 1fr auto; align-items: end; padding: 14px 22px 12px; }
+.restaurant-guest-picker label > span { grid-column: 1 / 3; color: #6f675e; font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.restaurant-guest-picker input { width: 100%; padding: 0; border: 0; outline: 0; background: transparent; color: var(--coal); font: 520 2.5rem/1 'Bodoni Moda Variable', serif; }
+.restaurant-guest-picker input::-webkit-inner-spin-button, .restaurant-guest-picker input::-webkit-outer-spin-button { margin: 0; appearance: none; }
+.restaurant-guest-picker label small { padding-bottom: 4px; color: #6f675e; font-size: .78rem; }
+.restaurant-guest-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.restaurant-guest-presets button { min-width: 48px; min-height: 38px; border: 1px solid rgb(23 19 15 / 28%); background: transparent; color: var(--coal); cursor: pointer; font-size: .78rem; }
+.restaurant-guest-presets button:hover, .restaurant-guest-presets button[aria-pressed='true'] { border-color: var(--clay); background: var(--clay); color: white; }
+.restaurant-group-guidance { max-width: 580px; margin: 18px 0 0; color: #6f675e; font-size: .82rem; line-height: 1.55; }
+.restaurant-group-guidance.is-group { padding-left: 14px; border-left: 3px solid var(--clay); color: var(--coal); }
+.restaurant-booking-panel .restaurant-date-options button:hover, .restaurant-booking-panel .restaurant-date-options button[aria-pressed='true'], .restaurant-booking-panel .restaurant-time-options button:hover, .restaurant-booking-panel .restaurant-time-options button[aria-pressed='true'] { border-color: var(--clay); background: var(--clay); color: white; }
 .restaurant-booking-panel .restaurant-date-options { grid-template-columns: repeat(7, 1fr); }
 .restaurant-booking-panel .restaurant-date-options button { min-height: 105px; border-color: rgb(23 19 15 / 28%); color: var(--coal); }
 .restaurant-booking-panel .restaurant-date-options small, .restaurant-booking-panel .restaurant-date-options span { font-size: .63rem; }
@@ -303,7 +314,8 @@
   .restaurant-booking-progress li { grid-template-columns: 28px; gap: 4px; justify-items: center; font-size: .58rem; }
   .restaurant-booking-progress li > span { width: 28px; height: 28px; }
   .restaurant-booking-summary { display: grid; gap: 10px; }
-  .restaurant-booking-panel .restaurant-guest-options { grid-template-columns: repeat(2, 1fr); }
+  .restaurant-guest-picker { grid-template-columns: 58px minmax(0, 1fr) 58px; }
+  .restaurant-guest-picker label { padding-right: 14px; padding-left: 14px; }
   .restaurant-booking-panel .restaurant-date-options { grid-template-columns: repeat(4, 1fr); }
   .restaurant-booking-panel .restaurant-time-options { grid-template-columns: 1fr 1fr; }
   .restaurant-contact-fields { grid-template-columns: 1fr; }

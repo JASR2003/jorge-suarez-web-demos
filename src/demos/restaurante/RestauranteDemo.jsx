@@ -143,6 +143,11 @@ export default function RestauranteDemo() {
     setReservationComplete(false)
   }
 
+  const updateGuests = (amount) => {
+    const normalizedAmount = Math.min(12, Math.max(1, Number(amount) || 1))
+    setGuests(normalizedAmount)
+  }
+
   return (
     <div className="restaurant-site">
       <a className="demo-skip" href="#restaurant-main">Saltar al contenido</a>
@@ -280,7 +285,7 @@ export default function RestauranteDemo() {
             <article>
               <Users aria-hidden="true" />
               <h3>Grupos y eventos</h3>
-              <p>Para mesas de 7 a 18 personas ofrecemos un menú compartido. Escríbenos con al menos siete días de anticipación.</p>
+              <p>Las mesas de 7 a 12 personas pueden reservar un menú compartido en línea. Para 13 a 18 personas preparamos una propuesta privada.</p>
               <a href="mailto:eventos@brasa.demo">Consultar evento <ArrowRight aria-hidden="true" /></a>
             </article>
           </div>
@@ -300,9 +305,9 @@ export default function RestauranteDemo() {
             <p className="restaurant-overline">Reservas</p>
             <h2 id="reservation-title">Nos vemos<br /><em>alrededor del fuego.</em></h2>
             <ul>
-              <li>Reservas disponibles para 1–6 personas</li>
+              <li>Reservas disponibles para 1–12 personas</li>
               <li>Las mesas se mantienen durante 15 minutos</li>
-              <li>Grupos mayores se coordinan por correo</li>
+              <li>Grupos de 13 o más se coordinan por correo</li>
             </ul>
           </div>
           <div className="restaurant-booking-panel">
@@ -340,14 +345,34 @@ export default function RestauranteDemo() {
 
                 {bookingStep === 1 && (
                   <fieldset className="restaurant-booking-step">
-                    <legend><span>01</span><strong>¿Para cuántas personas?</strong><small>Selecciona el tamaño de tu mesa.</small></legend>
-                    <div className="restaurant-guest-options">
-                      {[1, 2, 3, 4, 5, 6].map((amount) => (
-                        <button aria-pressed={guests === amount} key={amount} onClick={() => setGuests(amount)} type="button">
-                          <strong>{amount}</strong><small>{amount === 1 ? 'persona' : 'personas'}</small>
-                        </button>
+                    <legend><span>01</span><strong>¿Cuántas personas serán en total?</strong><small>Inclúyete en la cantidad. Tú + 7 amigos son 8 personas.</small></legend>
+                    <div className="restaurant-guest-picker">
+                      <button aria-label="Restar una persona" disabled={guests === 1} onClick={() => updateGuests(guests - 1)} type="button">−</button>
+                      <label>
+                        <span>Total de comensales</span>
+                        <input
+                          aria-describedby="guest-guidance"
+                          inputMode="numeric"
+                          max="12"
+                          min="1"
+                          onChange={(event) => updateGuests(event.target.value)}
+                          type="number"
+                          value={guests}
+                        />
+                        <small>{guests === 1 ? 'persona' : 'personas'}</small>
+                      </label>
+                      <button aria-label="Sumar una persona" disabled={guests === 12} onClick={() => updateGuests(guests + 1)} type="button">+</button>
+                    </div>
+                    <div className="restaurant-guest-presets" aria-label="Cantidades frecuentes">
+                      {[2, 4, 6, 8, 10, 12].map((amount) => (
+                        <button aria-pressed={guests === amount} key={amount} onClick={() => updateGuests(amount)} type="button">{amount}</button>
                       ))}
                     </div>
+                    <p className={`restaurant-group-guidance${guests >= 7 ? ' is-group' : ''}`} id="guest-guidance" aria-live="polite">
+                      {guests >= 7
+                        ? `Mesa para ${guests}: te mostraremos la disponibilidad para grupos y el menú compartido.`
+                        : 'Puedes escribir la cantidad o ajustarla con los controles.'}
+                    </p>
                   </fieldset>
                 )}
 
