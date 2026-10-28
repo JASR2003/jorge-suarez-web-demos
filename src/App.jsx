@@ -46,7 +46,7 @@ function App() {
         </a>
 
         <nav aria-label="Navegación principal">
-          <a href="#catalogo">Ideas</a>
+          <a href="#catalogo">Demos</a>
           <a href="#criterios">Criterios</a>
           <a href="#proceso">Proceso</a>
         </nav>
@@ -70,7 +70,7 @@ function App() {
               Conceptos digitales creados para distintos negocios, públicos y objetivos. Cada demo busca demostrar una solución, no cambiarle el color a la misma página.
             </p>
             <div className="hero-actions">
-              <a className="primary-action" href="#catalogo">Explorar ideas <ArrowDownRight aria-hidden="true" /></a>
+              <a className="primary-action" href="#catalogo">Explorar demos <ArrowDownRight aria-hidden="true" /></a>
               <a className="text-action" href="#criterios">Conocer el criterio</a>
             </div>
           </div>
@@ -93,15 +93,15 @@ function App() {
 
         <section className="catalog-section" id="catalogo" aria-labelledby="catalog-title">
           <div className="section-intro">
-            <p className="section-number">01 / Ideas candidatas</p>
+            <p className="section-number">01 / Demos básicas</p>
             <div>
-              <h2 id="catalog-title">Las próximas demos pueden salir de aquí.</h2>
-              <p>Este catálogo empieza como un mapa de posibilidades. Elegiremos las propuestas con mayor valor comercial y técnico para convertirlas en sitios completos.</p>
+              <h2 id="catalog-title">Diez puntos de partida, diez direcciones distintas.</h2>
+              <p>Cada versión básica ya responde a una industria, una acción comercial y un lenguaje visual propio. En las siguientes etapas refinaremos contenido, funciones y personalidad.</p>
             </div>
           </div>
 
           <div className="catalog-toolbar">
-            <div className="filter-list" aria-label="Filtrar ideas">
+            <div className="filter-list" aria-label="Filtrar demostraciones">
               {demoFilters.map((filter) => (
                 <button
                   aria-pressed={activeFilter === filter.id}
@@ -160,9 +160,9 @@ function App() {
         </section>
 
         <section className="closing-section">
-          <p>La colección comienza aquí.</p>
-          <h2>Ahora elegiremos cuál merece ser la primera.</h2>
-          <a href="#catalogo">Volver a las ideas <ArrowUpRight aria-hidden="true" /></a>
+          <p>La base ya está construida.</p>
+          <h2>Ahora cada demo puede crecer en su propia dirección.</h2>
+          <a href="#catalogo">Volver a las demos <ArrowUpRight aria-hidden="true" /></a>
         </section>
       </main>
 

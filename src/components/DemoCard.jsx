@@ -2,9 +2,11 @@ import { ArrowUpRight } from 'lucide-react'
 
 export function DemoCard({ demo }) {
   return (
-    <article
+    <a
       className="demo-card"
+      href={demo.href}
       style={{ '--card-accent': demo.accent, '--card-soft': demo.soft }}
+      aria-label={`Abrir demo básica: ${demo.title}`}
     >
       <div className="demo-card-top">
         <span>{demo.number}</span>
@@ -24,9 +26,9 @@ export function DemoCard({ demo }) {
       </div>
 
       <div className="demo-card-footer">
-        <span>Concepto candidato</span>
+        <span>Ver demo básica</span>
         <ArrowUpRight aria-hidden="true" />
       </div>
-    </article>
+    </a>
   )
 }

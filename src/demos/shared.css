@@ -1,0 +1,12 @@
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; }
+button, input, textarea, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+.demo-skip { position: fixed; z-index: 1000; top: 8px; left: 8px; transform: translateY(-150%); padding: 10px 14px; background: #fff; color: #111; }
+.demo-skip:focus { transform: translateY(0); }
+.catalog-return { display: inline-flex; align-items: center; gap: 8px; color: inherit; font-size: .72rem; font-weight: 800; text-decoration: none; }
+.catalog-return:hover { text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }

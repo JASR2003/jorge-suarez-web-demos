@@ -27,5 +27,18 @@ npm run build
 
 Netlify toma la configuración desde `netlify.toml`, ejecuta `npm run build` y publica el directorio `dist`.
 
-La página principal funciona como catálogo de ideas candidatas. Las demostraciones se añadirán como entradas multipágina independientes a medida que se seleccionen y desarrollen.
+La página principal funciona como catálogo y enlaza diez demostraciones multipágina independientes:
+
+- `/restaurante/`
+- `/fitness/`
+- `/clinica/`
+- `/inmobiliaria/`
+- `/tienda/`
+- `/producto/`
+- `/despacho/`
+- `/evento/`
+- `/blog/`
+- `/corporativo/`
+
+Cada demo comienza como una versión estática básica con estructura, contenido y dirección visual propias. Esto permite evolucionarlas por separado sin convertir la colección en simples variaciones de una misma plantilla.
 
