@@ -89,36 +89,89 @@ const tastingCourses = [
   'Cacao, café y sal',
 ]
 
-const reservationTimes = [
-  { value: '18:30', label: '6:30 PM' },
-  { value: '19:00', label: '7:00 PM' },
-  { value: '19:30', label: '7:30 PM', unavailable: true },
-  { value: '20:30', label: '8:30 PM' },
-  { value: '21:00', label: '9:00 PM' },
-  { value: '21:30', label: '9:30 PM' },
-]
+const weekdayLabels = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']
+
+const formatDateId = (date) => [
+  date.getFullYear(),
+  String(date.getMonth() + 1).padStart(2, '0'),
+  String(date.getDate()).padStart(2, '0'),
+].join('-')
+
+const getNextAvailableDate = () => {
+  const date = new Date()
+  date.setHours(12, 0, 0, 0)
+  date.setDate(date.getDate() + 1)
+  while (date.getDay() === 1) date.setDate(date.getDate() + 1)
+  return formatDateId(date)
+}
+
+const getServiceHours = (dateId) => {
+  const day = new Date(`${dateId}T12:00:00`).getDay()
+  if (day === 0) return { opens: '12:30', closes: '17:00', label: 'Almuerzo · 12:30 PM–5:00 PM' }
+  if (day >= 2 && day <= 4) return { opens: '18:00', closes: '23:00', label: 'Cena · 6:00 PM–11:00 PM' }
+  if (day === 5 || day === 6) return { opens: '12:30', closes: '23:30', label: 'Almuerzo y cena · 12:30 PM–11:30 PM' }
+  return null
+}
+
+const buildReservationTimes = (dateId) => {
+  const service = getServiceHours(dateId)
+  if (!service) return []
+
+  const [openHour, openMinute] = service.opens.split(':').map(Number)
+  const [closeHour, closeMinute] = service.closes.split(':').map(Number)
+  const start = openHour * 60 + openMinute
+  const end = closeHour * 60 + closeMinute
+
+  return Array.from({ length: Math.floor((end - start) / 30) + 1 }, (_, index) => {
+    const totalMinutes = start + index * 30
+    const hour = Math.floor(totalMinutes / 60)
+    const minute = totalMinutes % 60
+    const value = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`
+    const label = `${hour % 12 || 12}:${String(minute).padStart(2, '0')} ${hour < 12 ? 'AM' : 'PM'}`
+    return { value, label }
+  })
+}
 
 export default function RestauranteDemo() {
-  const reservationDates = useMemo(() => Array.from({ length: 7 }, (_, index) => {
-    const date = new Date()
-    date.setHours(12, 0, 0, 0)
-    date.setDate(date.getDate() + index + 1)
-
-    return {
-      id: date.toISOString().slice(0, 10),
-      day: date.toLocaleDateString('es-VE', { weekday: 'short' }).replace('.', ''),
-      number: date.getDate(),
-      month: date.toLocaleDateString('es-VE', { month: 'short' }).replace('.', ''),
-      full: date.toLocaleDateString('es-VE', { weekday: 'long', day: 'numeric', month: 'long' }),
-    }
-  }), [])
   const [guests, setGuests] = useState(2)
-  const [selectedDate, setSelectedDate] = useState(reservationDates[0].id)
+  const [selectedDate, setSelectedDate] = useState(getNextAvailableDate)
+  const [calendarOffset, setCalendarOffset] = useState(0)
   const [selectedTime, setSelectedTime] = useState('')
   const [bookingStep, setBookingStep] = useState(1)
   const [reservationComplete, setReservationComplete] = useState(false)
 
-  const selectedDateLabel = reservationDates.find((date) => date.id === selectedDate)?.full
+  const calendarMonth = useMemo(() => {
+    const month = new Date()
+    month.setHours(12, 0, 0, 0)
+    month.setDate(1)
+    month.setMonth(month.getMonth() + calendarOffset)
+    return month
+  }, [calendarOffset])
+  const calendarDays = useMemo(() => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const year = calendarMonth.getFullYear()
+    const month = calendarMonth.getMonth()
+    const daysInMonth = new Date(year, month + 1, 0).getDate()
+    const leadingSpaces = (new Date(year, month, 1).getDay() + 6) % 7
+    const blanks = Array.from({ length: leadingSpaces }, (_, index) => ({ blank: true, id: `blank-${index}` }))
+    const days = Array.from({ length: daysInMonth }, (_, index) => {
+      const date = new Date(year, month, index + 1, 12)
+      return {
+        id: formatDateId(date),
+        number: index + 1,
+        disabled: date < today || date.getDay() === 1,
+        closed: date.getDay() === 1,
+      }
+    })
+    return [...blanks, ...days]
+  }, [calendarMonth])
+  const reservationTimes = useMemo(() => buildReservationTimes(selectedDate), [selectedDate])
+  const selectedDateObject = new Date(`${selectedDate}T12:00:00`)
+  const selectedDateLabel = selectedDateObject.toLocaleDateString('es-VE', { weekday: 'long', day: 'numeric', month: 'long' })
+  const selectedTimeLabel = reservationTimes.find((time) => time.value === selectedTime)?.label
+  const serviceHours = getServiceHours(selectedDate)
+  const calendarMonthLabel = calendarMonth.toLocaleDateString('es-VE', { month: 'long', year: 'numeric' })
 
   useEffect(() => {
     const targetId = window.location.hash.slice(1)
@@ -137,7 +190,8 @@ export default function RestauranteDemo() {
 
   const resetReservation = () => {
     setGuests(2)
-    setSelectedDate(reservationDates[0].id)
+    setSelectedDate(getNextAvailableDate())
+    setCalendarOffset(0)
     setSelectedTime('')
     setBookingStep(1)
     setReservationComplete(false)
@@ -318,7 +372,7 @@ export default function RestauranteDemo() {
                 <h3>Tu mesa está preparada en esta demostración.</h3>
                 <dl>
                   <div><dt>Fecha</dt><dd>{selectedDateLabel}</dd></div>
-                  <div><dt>Hora</dt><dd>{reservationTimes.find((time) => time.value === selectedTime)?.label}</dd></div>
+                  <div><dt>Hora</dt><dd>{selectedTimeLabel}</dd></div>
                   <div><dt>Mesa</dt><dd>{guests} {guests === 1 ? 'persona' : 'personas'}</dd></div>
                 </dl>
                 <p>No se envió ni almacenó ninguna información. En un proyecto real, este paso se conectaría con el sistema de reservas del restaurante.</p>
@@ -340,7 +394,7 @@ export default function RestauranteDemo() {
                 <div className="restaurant-booking-summary" aria-label="Resumen de la reserva">
                   <span><Users aria-hidden="true" />{guests} {guests === 1 ? 'persona' : 'personas'}</span>
                   <span><CalendarDays aria-hidden="true" />{selectedDateLabel}</span>
-                  <span><Clock3 aria-hidden="true" />{selectedTime ? reservationTimes.find((time) => time.value === selectedTime)?.label : 'Hora pendiente'}</span>
+                  <span><Clock3 aria-hidden="true" />{selectedTimeLabel || 'Hora pendiente'}</span>
                 </div>
 
                 {bookingStep === 1 && (
@@ -378,30 +432,47 @@ export default function RestauranteDemo() {
 
                 {bookingStep === 2 && (
                   <fieldset className="restaurant-booking-step">
-                    <legend><span>02</span><strong>¿Qué día vienes?</strong><small>Mostramos los próximos siete días disponibles.</small></legend>
-                    <div className="restaurant-date-options">
-                      {reservationDates.map((date) => (
-                        <button aria-pressed={selectedDate === date.id} key={date.id} onClick={() => { setSelectedDate(date.id); setSelectedTime('') }} type="button">
-                          <small>{date.day}</small><strong>{date.number}</strong><span>{date.month}</span>
-                        </button>
-                      ))}
+                    <legend><span>02</span><strong>¿Qué día vienes?</strong><small>Consulta el mes completo. Los lunes permanecemos cerrados.</small></legend>
+                    <div className="restaurant-calendar">
+                      <div className="restaurant-calendar-header">
+                        <button aria-label="Ver mes anterior" disabled={calendarOffset === 0} onClick={() => setCalendarOffset((offset) => offset - 1)} type="button">←</button>
+                        <strong>{calendarMonthLabel}</strong>
+                        <button aria-label="Ver mes siguiente" disabled={calendarOffset === 5} onClick={() => setCalendarOffset((offset) => offset + 1)} type="button">→</button>
+                      </div>
+                      <div className="restaurant-calendar-weekdays" aria-hidden="true">
+                        {weekdayLabels.map((day) => <span key={day}>{day}</span>)}
+                      </div>
+                      <div className="restaurant-calendar-days">
+                        {calendarDays.map((date) => date.blank ? <span key={date.id} /> : (
+                          <button
+                            aria-label={`${date.number} de ${calendarMonthLabel}${date.closed ? ', cerrado' : ''}`}
+                            aria-pressed={selectedDate === date.id}
+                            disabled={date.disabled}
+                            key={date.id}
+                            onClick={() => { setSelectedDate(date.id); setSelectedTime('') }}
+                            type="button"
+                          >
+                            {date.number}{date.closed && <small>Cerrado</small>}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </fieldset>
                 )}
 
                 {bookingStep === 3 && (
                   <fieldset className="restaurant-booking-step">
-                    <legend><span>03</span><strong>Elige una hora</strong><small>Los horarios tachados ya no están disponibles.</small></legend>
+                    <legend><span>03</span><strong>Elige una hora</strong><small>Mostramos el servicio completo desde la apertura hasta el cierre.</small></legend>
+                    <p className="restaurant-service-window"><Clock3 aria-hidden="true" />{serviceHours?.label}</p>
                     <div className="restaurant-time-options">
                       {reservationTimes.map((time) => (
                         <button
                           aria-pressed={selectedTime === time.value}
-                          disabled={time.unavailable}
                           key={time.value}
                           onClick={() => setSelectedTime(time.value)}
                           type="button"
                         >
-                          {time.label}{time.unavailable && <small>Completo</small>}
+                          {time.label}
                         </button>
                       ))}
                     </div>

@@ -217,11 +217,25 @@
 .restaurant-group-guidance { max-width: 580px; margin: 18px 0 0; color: #6f675e; font-size: .82rem; line-height: 1.55; }
 .restaurant-group-guidance.is-group { padding-left: 14px; border-left: 3px solid var(--clay); color: var(--coal); }
 .restaurant-booking-panel .restaurant-date-options button:hover, .restaurant-booking-panel .restaurant-date-options button[aria-pressed='true'], .restaurant-booking-panel .restaurant-time-options button:hover, .restaurant-booking-panel .restaurant-time-options button[aria-pressed='true'] { border-color: var(--clay); background: var(--clay); color: white; }
-.restaurant-booking-panel .restaurant-date-options { grid-template-columns: repeat(7, 1fr); }
-.restaurant-booking-panel .restaurant-date-options button { min-height: 105px; border-color: rgb(23 19 15 / 28%); color: var(--coal); }
-.restaurant-booking-panel .restaurant-date-options small, .restaurant-booking-panel .restaurant-date-options span { font-size: .63rem; }
-.restaurant-booking-panel .restaurant-date-options strong { font-size: 1.75rem; }
-.restaurant-booking-panel .restaurant-time-options { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.restaurant-calendar { max-width: 650px; border: 1px solid rgb(23 19 15 / 28%); }
+.restaurant-calendar-header { display: grid; grid-template-columns: 54px 1fr 54px; align-items: center; min-height: 58px; border-bottom: 1px solid rgb(23 19 15 / 24%); }
+.restaurant-calendar-header strong { text-align: center; font-size: .82rem; letter-spacing: .08em; text-transform: capitalize; }
+.restaurant-calendar-header button { align-self: stretch; border: 0; background: transparent; color: var(--coal); cursor: pointer; font-size: 1.15rem; }
+.restaurant-calendar-header button:first-child { border-right: 1px solid rgb(23 19 15 / 24%); }
+.restaurant-calendar-header button:last-child { border-left: 1px solid rgb(23 19 15 / 24%); }
+.restaurant-calendar-header button:hover:not(:disabled) { background: var(--clay); color: white; }
+.restaurant-calendar-header button:disabled { cursor: not-allowed; opacity: .25; }
+.restaurant-calendar-weekdays, .restaurant-calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); }
+.restaurant-calendar-weekdays { padding: 12px 8px 7px; }
+.restaurant-calendar-weekdays span { color: #766e64; font-size: .62rem; font-weight: 700; text-align: center; text-transform: uppercase; }
+.restaurant-calendar-days { gap: 4px; padding: 5px 8px 10px; }
+.restaurant-calendar-days > button { display: grid; place-items: center; min-height: 52px; padding: 5px 2px; border: 1px solid transparent; background: transparent; color: var(--coal); cursor: pointer; font: 520 1rem 'Bodoni Moda Variable', serif; }
+.restaurant-calendar-days > button small { display: block; color: inherit; font: 650 .43rem 'Instrument Sans Variable', sans-serif; letter-spacing: .03em; text-transform: uppercase; }
+.restaurant-calendar-days > button:hover:not(:disabled), .restaurant-calendar-days > button[aria-pressed='true'] { border-color: var(--clay); background: var(--clay); color: white; }
+.restaurant-calendar-days > button:disabled { cursor: not-allowed; opacity: .28; }
+.restaurant-service-window { display: flex; align-items: center; gap: 9px; margin: -15px 0 18px 60px; color: #655e55; font-size: .78rem; }
+.restaurant-service-window svg { width: 16px; color: var(--clay); }
+.restaurant-booking-panel .restaurant-time-options { grid-template-columns: repeat(4, 1fr); gap: 8px; max-height: 285px; padding-right: 5px; overflow-y: auto; }
 .restaurant-booking-panel .restaurant-time-options button { min-height: 64px; border-color: rgb(23 19 15 / 28%); color: var(--coal); font-size: .85rem; }
 .restaurant-booking-panel .restaurant-time-options button:disabled { color: #756e65; }
 .restaurant-booking-panel .restaurant-contact-fields label { color: var(--coal); font-size: .72rem; }
@@ -316,8 +330,10 @@
   .restaurant-booking-summary { display: grid; gap: 10px; }
   .restaurant-guest-picker { grid-template-columns: 58px minmax(0, 1fr) 58px; }
   .restaurant-guest-picker label { padding-right: 14px; padding-left: 14px; }
-  .restaurant-booking-panel .restaurant-date-options { grid-template-columns: repeat(4, 1fr); }
   .restaurant-booking-panel .restaurant-time-options { grid-template-columns: 1fr 1fr; }
+  .restaurant-service-window { margin-left: 0; }
+  .restaurant-calendar-days > button { min-height: 44px; }
+  .restaurant-calendar-days > button small { display: none; }
   .restaurant-contact-fields { grid-template-columns: 1fr; }
   .restaurant-wide-field { grid-column: 1; }
   .restaurant-booking-step legend { grid-template-columns: 36px 1fr; }
