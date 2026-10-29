@@ -27,6 +27,11 @@ export default defineConfig({
         ...Object.fromEntries(
           demoPages.map((page) => [page, resolve(projectRoot, page, 'index.html')]),
         ),
+        fitnessInstalaciones: resolve(projectRoot, 'fitness', 'instalaciones', 'index.html'),
+        fitnessClases: resolve(projectRoot, 'fitness', 'clases', 'index.html'),
+        fitnessEntrenadores: resolve(projectRoot, 'fitness', 'entrenadores', 'index.html'),
+        fitnessEventos: resolve(projectRoot, 'fitness', 'eventos', 'index.html'),
+        fitnessHorarios: resolve(projectRoot, 'fitness', 'horarios', 'index.html'),
       },
     },
   },

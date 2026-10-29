@@ -4,7 +4,7 @@ import './shared.css'
 
 const demoLoaders = {
   restaurante: () => import('./restaurante/RestauranteDemo.jsx'),
-  fitness: () => import('./fitness/FitnessFullDemo.jsx'),
+  fitness: () => import('./fitness/FitnessMultiPage.jsx'),
   clinica: () => import('./clinica/ClinicaDemo.jsx'),
   inmobiliaria: () => import('./inmobiliaria/InmobiliariaDemo.jsx'),
   tienda: () => import('./tienda/TiendaDemo.jsx'),
