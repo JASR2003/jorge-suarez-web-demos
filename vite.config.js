@@ -49,6 +49,8 @@ export default defineConfig({
         tiendaEnvios: resolve(projectRoot, 'tienda', 'envios', 'index.html'),
         tiendaFavoritos: resolve(projectRoot, 'tienda', 'favoritos', 'index.html'),
         tiendaCheckout: resolve(projectRoot, 'tienda', 'checkout', 'index.html'),
+        tiendaCuenta: resolve(projectRoot, 'tienda', 'cuenta', 'index.html'),
+        tiendaPedido: resolve(projectRoot, 'tienda', 'pedido', 'index.html'),
       },
     },
   },
