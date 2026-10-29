@@ -17,6 +17,7 @@ import heroImage from '../../assets/restaurante/brasa-hero.jpg'
 import roomImage from '../../assets/restaurante/brasa-room.jpg'
 import dishImage from '../../assets/restaurante/brasa-dish.jpg'
 import './restaurante.css'
+import '../responsive-audit.css'
 
 const menuSections = [
   {

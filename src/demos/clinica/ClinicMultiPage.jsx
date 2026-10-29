@@ -5,6 +5,7 @@ import heroImage from '../../assets/clinica/clinica-hero.jpg'
 import diagnosticImage from '../../assets/clinica/clinica-diagnostico.jpg'
 import teamImage from '../../assets/clinica/clinica-equipo.jpg'
 import './clinic-pages.css'
+import '../responsive-audit.css'
 
 const base = '/clinica'
 const nav = [['Especialidades','especialidades'],['Médicos','medicos'],['Diagnóstico','diagnostico'],['Pacientes','pacientes'],['Ubicación','ubicacion']]

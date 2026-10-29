@@ -6,6 +6,7 @@ import zonesImage from '../../assets/fitness/fitness-zones.jpg'
 import spinningImage from '../../assets/fitness/fitness-spinning.jpg'
 import './fitness-full.css'
 import './fitness-pages.css'
+import '../responsive-audit.css'
 
 const base = '/fitness'
 const nav = [['Instalaciones', 'instalaciones'], ['Clases', 'clases'], ['Entrenadores', 'entrenadores'], ['Eventos', 'eventos'], ['Horarios', 'horarios']]
