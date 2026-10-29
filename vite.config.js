@@ -47,6 +47,8 @@ export default defineConfig({
         tiendaProducto: resolve(projectRoot, 'tienda', 'producto', 'index.html'),
         tiendaBolsa: resolve(projectRoot, 'tienda', 'bolsa', 'index.html'),
         tiendaEnvios: resolve(projectRoot, 'tienda', 'envios', 'index.html'),
+        tiendaFavoritos: resolve(projectRoot, 'tienda', 'favoritos', 'index.html'),
+        tiendaCheckout: resolve(projectRoot, 'tienda', 'checkout', 'index.html'),
       },
     },
   },
