@@ -18,7 +18,7 @@
 .fitness-home-dashboard>header>span { color:var(--red); font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
 .fitness-home-dashboard h2 { margin:0; font-size:clamp(4rem,7vw,7rem); line-height:.82; }
 .fitness-category-grid { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); grid-auto-flow:dense; gap:14px; }
-.category-card { position:relative; grid-column:span 4; display:flex; flex-direction:column; min-height:360px; padding:28px; overflow:hidden; border:1px solid #9f9c96; background:#f4f1eb; }
+.fitness-site .category-card { position:relative; grid-column:span 4; display:flex; flex-direction:column; min-height:360px; padding:28px; overflow:hidden; border:1px solid #9f9c96; background:#f4f1eb; color:#080808; }
 .category-card>svg:first-child { width:30px; height:30px; color:var(--red); }
 .category-card>span { margin-top:auto; color:var(--red); font-size:.66rem; font-weight:850; }
 .category-card h3 { max-width:330px; margin:18px 0 12px; font-size:1.8rem; line-height:1.05; }
@@ -26,17 +26,19 @@
 .category-card>strong { margin-top:22px; font-size:.68rem; text-transform:uppercase; }
 .category-card>svg:last-child { position:absolute; right:25px; bottom:25px; width:20px; }
 .category-card:hover { border-color:var(--red); }
-.category-image { grid-column:span 8; min-height:470px; color:white; }
+.category-card:focus-visible { outline:3px solid currentColor; outline-offset:-7px; }
+.fitness-site .category-image { grid-column:span 8; min-height:470px; color:white; }
 .category-image>img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .category-image::after { position:absolute; inset:0; background:linear-gradient(0deg,rgb(0 0 0 / 90%),rgb(0 0 0 / 5%)); content:''; }
 .category-image>*:not(img) { z-index:1; }
 .category-image h3 { color:white; text-shadow:0 2px 18px rgb(0 0 0 / 80%); }
 .category-image p { color:#ccc; }
-.category-red { background:var(--red); color:white; }
-.category-red>svg:first-child,.category-red>span { color:white; }
-.category-red p { color:#ffe3e0; }
-.category-wide { grid-column:span 4; background:#111; color:white; }
-.category-wide p { color:#aaa; }
+.fitness-site .category-red { background:var(--red); color:#080808; }
+.category-red>svg:first-child,.category-red>span { color:#080808; }
+.category-red p { color:#260604; }
+.fitness-site .category-wide { grid-column:span 4; background:#111; color:#fff; }
+.category-wide h3,.category-wide>strong,.category-wide>svg:last-child { color:#fff; }
+.category-wide p { color:#c7c7c7; }
 .category-wide>svg:first-child { color:white; }
 .category-wide>span { color:var(--red); }
 
