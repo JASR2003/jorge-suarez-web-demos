@@ -26,3 +26,6 @@
 /* Cinta continua: dos bloques idénticos eliminan el espacio vacío al reiniciar. */
 .ysysmo-site .cv-marquee{display:flex;width:100%;padding:17px 0}.ysysmo-site .cv-marquee-track{display:flex;width:max-content;will-change:transform;animation:ys-marquee-loop 28s linear infinite}.ysysmo-site .cv-marquee-track span{flex:none;padding-right:1.1ch;white-space:nowrap}@keyframes ys-marquee-loop{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 @media(prefers-reduced-motion:reduce){.ysysmo-site .cv-marquee-track{animation-duration:90s}}
+
+/* Invitados: el magenta queda como acento y no como fondo dominante. */
+.ysysmo-site .cv-experience{background:linear-gradient(135deg,#351227 0%,#101c25 58%,#062f3b 100%);color:#f7f3f5}.ysysmo-site .cv-experience>div>p{color:#39e5df}.ysysmo-site .cv-experience article{border-color:rgba(240,0,123,.42);background:rgba(4,14,20,.2)}.ysysmo-site .cv-experience article:nth-child(3n+2){background:rgba(240,0,123,.07)}.ysysmo-site .cv-experience article>span{color:#39e5df}.ysysmo-site .cv-experience article p{color:#d7c5cf}
