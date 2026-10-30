@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './shared.css'
+import './responsive-audit.css'
 
 const demoLoaders = {
   restaurante: () => import('./restaurante/RestauranteDemo.jsx'),

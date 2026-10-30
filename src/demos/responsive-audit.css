@@ -16,3 +16,47 @@
 @media(max-width:820px){
   .clinic-emergency{padding:10px 20px;font-size:.66rem;line-height:1.4}
 }
+
+/* Second full-route audit: narrow mobile containment and readable controls. */
+.lm-site,.nodo,.ysysmo-site{width:100%;max-width:100%;overflow-x:clip}
+
+@media(max-width:680px){
+  .lm-site *{min-width:0}
+  .lm-page-hero,.lm-page-hero>div,.lm-page-intro,.lm-home-hero,.lm-home-copy,
+  .lm-home-practices,.lm-home-case,.lm-home-team,.lm-home-insights,.lm-contact-band,
+  .lm-areas-index,.lm-area-body,.lm-matters,.lm-team-grid,.lm-resource-grid,
+  .lm-contact-page,.lm-story,.lm-methodology,.lm-commitments,.lm-sectors{
+    width:100%;max-width:100%
+  }
+  .lm-page-hero h1,.lm-home-copy h1,.lm-area-hero h1,.lm-lawyer-hero h1,
+  .lm-page-intro h2,.lm-site p,.lm-site a{overflow-wrap:anywhere}
+  .lm-menu{display:grid;place-items:center;width:44px;height:44px}
+  .lm-brand{min-height:44px}
+  .lm-contact-band>a,.lm-primary{min-height:44px}
+}
+
+@media(max-width:620px){
+  .nodo *{min-width:0}
+  .nd-hero,.nd-page-hero,.nd-page-hero>div,.nd-page-hero figure,.nd-art.photo,
+  .nd-bundle,.nd-bundle figure,.nd-business,.nd-business figure,.nd-packages,
+  .nd-packages>div:last-child,.nd-packages article{width:100%;max-width:100%}
+  .nd-page-hero figure,.nd-art.photo,.nd-bundle figure,.nd-business figure{margin:0;overflow:hidden}
+  .nd-page-hero img,.nd-art.photo>img,.nd-bundle img,.nd-business img{display:block;width:100%;max-width:100%;height:100%;object-fit:cover}
+  .nd-packages article{overflow:hidden;overflow-wrap:anywhere}
+  .nd-menu{display:grid;place-items:center;width:44px;height:44px}
+  .nd-logo{min-height:44px}
+  .nd-button{min-height:44px}
+}
+
+@media(max-width:520px){
+  .ysysmo-site *{min-width:0}
+  .ysysmo-site .cv-hero,.ysysmo-site .cv-hero-main,.ysysmo-site .cv-hero aside,
+  .ysysmo-site .ys-gallery,.ysysmo-site .ys-setlist,.ysysmo-site .ys-stage,
+  .ysysmo-site .ys-final,.ysysmo-site .cv-tickets,.ysysmo-site .cv-faq{
+    width:100%;max-width:100%
+  }
+  .ysysmo-site .cv-hero-main,.ysysmo-site .cv-hero aside{overflow-wrap:anywhere}
+  .ysysmo-site .cv-logo{display:flex;align-items:center;min-height:44px}
+  .ysysmo-site .cv-menu,.ysysmo-site .cv-buy{min-width:44px;min-height:44px}
+  .ysysmo-site .ys-links a{min-height:44px}
+}
