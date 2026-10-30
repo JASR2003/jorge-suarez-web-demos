@@ -8,19 +8,52 @@ import './barca-blog.css'
 const filters = ['TODOS', 'LALIGA', 'CHAMPIONS', 'COPA DEL REY', 'SUPERCOPA', 'AMISTOSO', 'JOAN GAMPER']
 const resultLabel = { W: 'VICTORIA', D: 'EMPATE', L: 'DERROTA' }
 
+const monthTranslations = {
+  January: 'enero', February: 'febrero', March: 'marzo', April: 'abril', May: 'mayo', June: 'junio',
+  July: 'julio', August: 'agosto', September: 'septiembre', October: 'octubre', November: 'noviembre', December: 'diciembre',
+}
+const competitionNames = {
+  CHAMPIONS: 'Liga de Campeones', LALIGA: 'LaLiga', 'COPA DEL REY': 'Copa del Rey',
+  SUPERCOPA: 'Supercopa de España', AMISTOSO: 'amistoso', 'JOAN GAMPER': 'Trofeo Joan Gamper',
+}
+
+const formatDateEs = (value) => {
+  if (!value) return ''
+  const isoDate = /^\d{4}-\d{2}-\d{2}$/.test(value)
+  if (isoDate) return new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`))
+  return Object.entries(monthTranslations).reduce((date, [english, spanish]) => date.replace(english, `de ${spanish} de`), String(value))
+}
+
+const formatRoundEs = (value) => String(value || '')
+  .replace(/<br>/g, ' · ')
+  .replace(/Matchday\s+(\d+)/gi, 'Jornada $1')
+  .replace(/Round of 32/gi, 'Ronda de 32')
+  .replace(/Round of 16/gi, 'Octavos de final')
+  .replace(/Quarter-finals?/gi, 'Cuartos de final')
+  .replace(/Semi-finals?/gi, 'Semifinales')
+  .replace(/First leg/gi, 'Ida')
+  .replace(/Second leg/gi, 'Vuelta')
+  .replace(/Friendly/gi, 'Amistoso')
+  .replace(/Preseason/gi, 'Pretemporada')
+
+const competitionName = (value) => competitionNames[value] || value
+const hasVerifiedImage = (article) => Boolean(article.image && article.imageExact !== false)
+
 const slugify = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 const historicalArticle = (match, season, index) => {
   const opponent = match.home === 'Barcelona' ? match.away : match.home
-  const round = String(match.round).replace(/<br>/g, ' · ')
+  const round = formatRoundEs(match.round)
+  const date = formatDateEs(match.date)
+  const competition = competitionName(match.competition)
   const slug = `${season.replace('/', '-')}-${slugify(match.date)}-${slugify(opponent)}`
   return {
     ...match, slug, season, round, opponent, historical: true,
     source: match.report,
     title: `${match.home} ${match.score} ${match.away}: la ficha del partido`,
-    dek: `${resultLabel[match.result]} azulgrana en ${match.competition.toLowerCase()}, correspondiente a ${round || 'la temporada regular'}.`,
+    dek: `${resultLabel[match.result]} azulgrana en ${competition}, correspondiente a ${round || 'la temporada regular'}.`,
     goals: 'Consulta la ficha enlazada para el detalle de goleadores.',
     body: [
-      `El archivo de la era Flick registra este ${match.home} ${match.score} ${match.away}, disputado el ${match.date}. El encuentro formó parte de ${match.competition.toLowerCase()} y terminó con ${resultLabel[match.result].toLowerCase()} para el FC Barcelona.`,
+      `El archivo de la era Flick registra el ${match.home} ${match.score} ${match.away}, disputado el ${date}. El encuentro correspondió a ${competition} y terminó con ${resultLabel[match.result].toLowerCase()} para el FC Barcelona.`,
       `La cita se jugó en ${match.stadium || 'el estadio del equipo local'}. Esta ficha permite recorrer el calendario completo sin reducir la historia del ciclo únicamente a las finales o a los partidos más recordados.`,
       `El resultado ocupa el lugar ${index + 1} dentro del archivo de la temporada ${season}. Para alineaciones, goleadores e incidencias se conserva el acceso a la ficha de la competición utilizada como referencia.`,
     ],
@@ -52,9 +85,9 @@ function MatchCard({ article, compact = false }) {
   const [homeGoals, awayGoals] = scoreParts(article.score)
   return (
     <a className={`barca-match-card ${compact ? 'is-compact' : ''}`} href={articleUrl(article.slug)}>
-      {article.image ? <div className="barca-match-card__image"><img src={article.image} alt="" loading="lazy" /><span>{article.competition}</span></div> : <div className={`barca-match-card__poster result-${article.result?.toLowerCase()}`}><span>{article.season}</span><strong>{article.score}</strong><small>{article.competition}</small></div>}
+      {hasVerifiedImage(article) ? <div className="barca-match-card__image"><img src={article.image} alt={`Imagen verificada del partido ${article.home} contra ${article.away}`} loading="lazy" /><span>{competitionName(article.competition)}</span></div> : <div className={`barca-match-card__poster result-${article.result?.toLowerCase()}`}><span>{article.season}</span><strong>{article.score}</strong><small>{competitionName(article.competition)}</small></div>}
       <div className="barca-match-card__body">
-        <p className="barca-eyebrow">{article.date} · {article.round}</p>
+        <p className="barca-eyebrow">{formatDateEs(article.date)} · {formatRoundEs(article.round)}</p>
         <div className="barca-scoreline" aria-label={`${article.home} ${homeGoals}, ${article.away} ${awayGoals}`}>
           <span>{article.home}</span><strong>{homeGoals}</strong>
           <span>{article.away}</span><strong>{awayGoals}</strong>
@@ -215,16 +248,16 @@ function ArticlePage({ article }) {
   return <div className="barca-site">
     <SiteHeader activeSeason={article.season || '2026/27'} onSearch={() => { window.location.hash = '#archivo' }} />
     <main className="barca-article">
-      <div className="barca-article__top"><a href="#portada">← Volver a portada</a><span>{article.competition} · {article.round}</span></div>
+      <div className="barca-article__top"><a href="#portada">← Volver a portada</a><span>{competitionName(article.competition)} · {formatRoundEs(article.round)}</span></div>
       <header className="barca-article__header">
-        <p className="barca-kicker">CRÓNICA · {article.date}</p><h1>{article.title}</h1><p>{article.dek}</p>
+        <p className="barca-kicker">CRÓNICA · {formatDateEs(article.date)}</p><h1>{article.title}</h1><p>{article.dek}</p>
       </header>
-      {article.image ? <figure className="barca-article__figure"><img src={article.image} alt={article.imageExact === false ? `Imagen de archivo de la temporada ${article.season}` : `Imagen del partido ${article.home} contra ${article.away}`} /><figcaption>{article.imageExact === false ? `Imagen editorial de archivo de la temporada ${article.season}; la ficha de origen no expone una fotografía propia.` : 'Imagen de la crónica oficial del FC Barcelona.'}</figcaption></figure> : <div className="barca-article__poster"><span>{article.season} · {article.competition}</span><div><b>{article.home}</b><strong>{article.score}</strong><b>{article.away}</b></div><small>{article.date} · {article.stadium}</small></div>}
+      {hasVerifiedImage(article) ? <figure className="barca-article__figure"><img src={article.image} alt={`Imagen verificada del partido ${article.home} contra ${article.away}`} /><figcaption>Imagen vinculada a la crónica específica de este encuentro.</figcaption></figure> : <div className="barca-article__poster"><span>{article.season} · {competitionName(article.competition)}</span><div><b>{article.home}</b><strong>{article.score}</strong><b>{article.away}</b></div><small>{formatDateEs(article.date)} · {article.stadium}</small></div>}
       <div className="barca-article__layout">
-        <aside className="barca-match-sheet"><p>FICHA DEL PARTIDO</p><div className="barca-match-sheet__score"><span>{article.home}<b>{homeGoals}</b></span><i>FINAL</i><span>{article.away}<b>{awayGoals}</b></span></div><dl><div><dt>Fecha</dt><dd>{article.date}</dd></div><div><dt>Estadio</dt><dd>{article.venue || article.stadium}</dd></div><div><dt>Competición</dt><dd>{article.competition}</dd></div><div><dt>Goles</dt><dd>{article.goals}</dd></div></dl></aside>
+        <aside className="barca-match-sheet"><p>FICHA DEL PARTIDO</p><div className="barca-match-sheet__score"><span>{article.home}<b>{homeGoals}</b></span><i>FINAL</i><span>{article.away}<b>{awayGoals}</b></span></div><dl><div><dt>Fecha</dt><dd>{formatDateEs(article.date)}</dd></div><div><dt>Estadio</dt><dd>{article.venue || article.stadium}</dd></div><div><dt>Competición</dt><dd>{competitionName(article.competition)}</dd></div><div><dt>Goles</dt><dd>{article.goals}</dd></div></dl></aside>
         <article className="barca-article__body">{article.body.map((paragraph) => <p key={paragraph.slice(0, 30)}>{paragraph}</p>)}<div className="barca-source"><span>Fuente de datos y referencia</span><a href={article.source} target="_blank" rel="noreferrer">Leer la crónica oficial ↗</a></div></article>
       </div>
-      <section className="barca-related"><div className="barca-section-heading"><p>SIGUE LEYENDO</p><h2>Más de {article.competition.toLowerCase()}</h2></div><div>{related.map((item) => <MatchCard key={item.slug} article={item} compact />)}</div></section>
+      <section className="barca-related"><div className="barca-section-heading"><p>SIGUE LEYENDO</p><h2>Más de {competitionName(article.competition)}</h2></div><div>{related.map((item) => <MatchCard key={item.slug} article={item} compact />)}</div></section>
       <section className="barca-newsletter"><div><p>ARCHIVO 26/27</p><h2>Todos los partidos, un solo relato.</h2></div>{subscribed ? <p className="barca-success">Suscripción registrada en esta demo.</p> : <button className="barca-newsletter__standalone" onClick={() => setSubscribed(true)}>Seguir la temporada →</button>}</section>
     </main>
     <Footer />
