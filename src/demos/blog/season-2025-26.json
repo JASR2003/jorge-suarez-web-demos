@@ -2,6 +2,62 @@
   "season": "2025/26",
   "matches": [
     {
+      "date": "27 July 2025",
+      "competition": "AMISTOSO",
+      "round": "Friendly",
+      "home": "Vissel Kobe",
+      "score": "1–3",
+      "away": "Barcelona",
+      "stadium": "Noevir Stadium Kobe",
+      "result": "W",
+      "report": "https://www.fcbarcelona.com/en/football/first-team/news/4325149/vissel-kobe-1-3-fc-barcelona-promising-start",
+      "imageSource": "https://www.fcbarcelona.com/fcbarcelona/photo/2025/07/27/77682080-dd3c-4793-8aab-c4d5bcb15da6/_MGA5490.jpg",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": true
+    },
+    {
+      "date": "31 July 2025",
+      "competition": "AMISTOSO",
+      "round": "Friendly",
+      "home": "FC Seoul",
+      "score": "3–7",
+      "away": "Barcelona",
+      "stadium": "Seoul World Cup Stadium",
+      "result": "W",
+      "report": "https://www.fcbarcelona.com/en/football/first-team/news/4329645/fc-seoul-37-fc-barcelona-goalfest-in-korea",
+      "imageSource": "https://www.fcbarcelona.com/fcbarcelona/photo/2025/07/31/9822f3a3-ec0f-49ed-b533-7cb970c368ca/_MGA8074-1-.jpg",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": true
+    },
+    {
+      "date": "4 August 2025",
+      "competition": "AMISTOSO",
+      "round": "Friendly",
+      "home": "Daegu FC",
+      "score": "0–5",
+      "away": "Barcelona",
+      "stadium": "Daegu Stadium",
+      "result": "W",
+      "report": "https://www.fcbarcelona.com/en/football/first-team/news/4333557/daegu-0-5-fc-barcelona-another-solid-victory",
+      "imageSource": "https://www.fcbarcelona.com/fcbarcelona/photo/2025/08/04/39c29909-b0d1-484d-94e1-443733a6b736/_GP15732.jpg",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": true
+    },
+    {
+      "date": "10 August 2025",
+      "competition": "JOAN GAMPER",
+      "round": "Joan Gamper Trophy",
+      "home": "Barcelona",
+      "score": "5–0",
+      "away": "Como",
+      "stadium": "Johan Cruyff Stadium",
+      "result": "W",
+      "report": "https://www.fcbarcelona.com/en/football/first-team/news/4337923/fc-barcelona-5-0-como-1907-gamper-glory",
+      "imageSource": "https://www.fcbarcelona.com/fcbarcelona/photo/2025/08/10/70950b3b-0269-419c-b111-93c3ed17e89e/_MGA9122-1-.jpg",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": true
+    },
+    {
       "date": "16 August 2025",
       "competition": "LALIGA",
       "round": "1",
@@ -10,7 +66,10 @@
       "away": "Barcelona",
       "stadium": "Son Moix",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-rcd-mallorca-fc-barcelona-1"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-rcd-mallorca-fc-barcelona-1",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "23 August 2025",
@@ -21,7 +80,10 @@
       "away": "Barcelona",
       "stadium": "Ciutat de València",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-levante-ud-fc-barcelona-2"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-levante-ud-fc-barcelona-2",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "31 August 2025",
@@ -32,7 +94,10 @@
       "away": "Barcelona",
       "stadium": "Vallecas",
       "result": "D",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-rayo-vallecano-fc-barcelona-3"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-rayo-vallecano-fc-barcelona-3",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "14 September 2025",
@@ -43,7 +108,10 @@
       "away": "Valencia",
       "stadium": "Johan Cruyff Stadium",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-valencia-cf-4"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-valencia-cf-4",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "21 September 2025",
@@ -54,7 +122,10 @@
       "away": "Getafe",
       "stadium": "Johan Cruyff Stadium",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-getafe-cf-5"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-getafe-cf-5",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "25 September 2025",
@@ -65,7 +136,10 @@
       "away": "Barcelona",
       "stadium": "Carlos Tartiere",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-real-oviedo-fc-barcelona-6"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-real-oviedo-fc-barcelona-6",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "28 September 2025",
@@ -76,7 +150,10 @@
       "away": "Real Sociedad",
       "stadium": "Estadi Olímpic Lluís Companys",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-real-sociedad-7"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-real-sociedad-7",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "5 October 2025",
@@ -87,7 +164,10 @@
       "away": "Barcelona",
       "stadium": "Ramón Sánchez Pizjuán",
       "result": "L",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-sevilla-fc-fc-barcelona-8"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-sevilla-fc-fc-barcelona-8",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "18 October 2025",
@@ -98,7 +178,10 @@
       "away": "Girona",
       "stadium": "Estadi Olímpic Lluís Companys",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-girona-fc-9"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-girona-fc-9",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "26 October 2025",
@@ -109,7 +192,10 @@
       "away": "Barcelona",
       "stadium": "Bernabéu",
       "result": "L",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-real-madrid-fc-barcelona-10"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-real-madrid-fc-barcelona-10",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "2 November 2025",
@@ -120,7 +206,10 @@
       "away": "Elche",
       "stadium": "Estadi Olímpic Lluís Companys",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-elche-cf-11"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-elche-cf-11",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "9 November 2025",
@@ -131,7 +220,10 @@
       "away": "Barcelona",
       "stadium": "Abanca-Balaídos",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-rc-celta-fc-barcelona-12"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-rc-celta-fc-barcelona-12",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "22 November 2025",
@@ -142,7 +234,10 @@
       "away": "Athletic Bilbao",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-athletic-club-13"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-athletic-club-13",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "29 November 2025",
@@ -153,7 +248,10 @@
       "away": "Alavés",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-deportivo-alaves-14"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-deportivo-alaves-14",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "2 December 2025",
@@ -164,7 +262,10 @@
       "away": "Atlético Madrid",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-atletico-de-madrid-19"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-atletico-de-madrid-19",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "6 December 2025",
@@ -175,7 +276,10 @@
       "away": "Barcelona",
       "stadium": "La Cartuja",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-real-betis-fc-barcelona-15"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-real-betis-fc-barcelona-15",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "13 December 2025",
@@ -186,7 +290,10 @@
       "away": "Osasuna",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-ca-osasuna-16"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-ca-osasuna-16",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "21 December 2025",
@@ -197,7 +304,10 @@
       "away": "Barcelona",
       "stadium": "La Cerámica",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-villarreal-cf-fc-barcelona-17"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-villarreal-cf-fc-barcelona-17",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "3 January 2026",
@@ -208,7 +318,10 @@
       "away": "Barcelona",
       "stadium": "RCDE Stadium",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-rcd-espanyol-de-barcelona-fc-barcelona-18"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-rcd-espanyol-de-barcelona-fc-barcelona-18",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "18 January 2026",
@@ -219,7 +332,10 @@
       "away": "Barcelona",
       "stadium": "Anoeta",
       "result": "L",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-real-sociedad-fc-barcelona-20"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-real-sociedad-fc-barcelona-20",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "25 January 2026",
@@ -230,7 +346,10 @@
       "away": "Oviedo",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-real-oviedo-21"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-real-oviedo-21",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "31 January 2026",
@@ -241,7 +360,10 @@
       "away": "Barcelona",
       "stadium": "Martínez Valero",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-elche-cf-fc-barcelona-22"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-elche-cf-fc-barcelona-22",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "7 February 2026",
@@ -252,7 +374,10 @@
       "away": "Mallorca",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-rcd-mallorca-23"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-rcd-mallorca-23",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "16 February 2026",
@@ -263,7 +388,10 @@
       "away": "Barcelona",
       "stadium": "Montilivi",
       "result": "L",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-girona-fc-fc-barcelona-24"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-girona-fc-fc-barcelona-24",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "22 February 2026",
@@ -274,7 +402,10 @@
       "away": "Levante",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-levante-ud-25"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-levante-ud-25",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "28 February 2026",
@@ -285,7 +416,10 @@
       "away": "Villarreal",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-villarreal-cf-26"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-villarreal-cf-26",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "7 March 2026",
@@ -296,7 +430,10 @@
       "away": "Barcelona",
       "stadium": "San Mamés",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-athletic-club-fc-barcelona-27"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-athletic-club-fc-barcelona-27",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "15 March 2026",
@@ -307,7 +444,10 @@
       "away": "Sevilla",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-sevilla-fc-28"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-sevilla-fc-28",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "22 March 2026",
@@ -318,7 +458,10 @@
       "away": "Rayo Vallecano",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-rayo-vallecano-29"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-rayo-vallecano-29",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "4 April 2026",
@@ -329,7 +472,10 @@
       "away": "Barcelona",
       "stadium": "Riyadh Air Metropolitano",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-atletico-de-madrid-fc-barcelona-30"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-atletico-de-madrid-fc-barcelona-30",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "11 April 2026",
@@ -340,7 +486,10 @@
       "away": "Espanyol",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-rcd-espanyol-de-barcelona-31"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-rcd-espanyol-de-barcelona-31",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "22 April 2026",
@@ -351,7 +500,10 @@
       "away": "Celta Vigo",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-rc-celta-33"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-rc-celta-33",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "25 April 2026",
@@ -362,7 +514,10 @@
       "away": "Barcelona",
       "stadium": "Coliseum",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-getafe-cf-fc-barcelona-32"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-getafe-cf-fc-barcelona-32",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "2 May 2026",
@@ -373,7 +528,10 @@
       "away": "Barcelona",
       "stadium": "El Sadar",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-ca-osasuna-fc-barcelona-34"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-ca-osasuna-fc-barcelona-34",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "10 May 2026",
@@ -384,7 +542,10 @@
       "away": "Real Madrid",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-real-madrid-35"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-real-madrid-35",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "13 May 2026",
@@ -395,7 +556,10 @@
       "away": "Barcelona",
       "stadium": "Mendizorrotza",
       "result": "L",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-deportivo-alaves-fc-barcelona-36"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-deportivo-alaves-fc-barcelona-36",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "17 May 2026",
@@ -406,7 +570,10 @@
       "away": "Real Betis",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-real-betis-37"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-fc-barcelona-real-betis-37",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "23 May 2026",
@@ -417,7 +584,10 @@
       "away": "Barcelona",
       "stadium": "Mestalla",
       "result": "L",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-valencia-cf-fc-barcelona-38"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-ea-sports-valencia-cf-fc-barcelona-38",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "16 December 2025",
@@ -428,7 +598,10 @@
       "away": "Barcelona",
       "stadium": "Pedro Escartín",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-copa-del-rey-cd-guadalajara-fc-barcelona-5"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-copa-del-rey-cd-guadalajara-fc-barcelona-5",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "15 January 2026",
@@ -439,7 +612,10 @@
       "away": "Barcelona",
       "stadium": "El Sardinero",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-copa-del-rey-r-racing-club-fc-barcelona-6"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-copa-del-rey-r-racing-club-fc-barcelona-6",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "3 February 2026",
@@ -450,7 +626,10 @@
       "away": "Barcelona",
       "stadium": "Carlos Belmonte",
       "result": "W",
-      "report": "https://www.laliga.com/en-ES/match/temporada-2025-2026-copa-del-rey-albacete-bp-fc-barcelona-7"
+      "report": "https://www.laliga.com/en-ES/match/temporada-2025-2026-copa-del-rey-albacete-bp-fc-barcelona-7",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "12 February 2026",
@@ -461,7 +640,10 @@
       "away": "Barcelona",
       "stadium": "Riyadh Air Metropolitano",
       "result": "L",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-copa-del-rey-atletico-de-madrid-fc-barcelona-8"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-copa-del-rey-atletico-de-madrid-fc-barcelona-8",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "3 March 2026",
@@ -472,7 +654,10 @@
       "away": "Atlético Madrid",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-copa-del-rey-fc-barcelona-atletico-de-madrid-9"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-copa-del-rey-fc-barcelona-atletico-de-madrid-9",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "7 January 2026",
@@ -483,7 +668,10 @@
       "away": "Athletic Bilbao",
       "stadium": "King Abdullah Sports City Stadium",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-supercopa-de-espana-fc-barcelona-athletic-club-1"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-supercopa-de-espana-fc-barcelona-athletic-club-1",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "11 January 2026",
@@ -494,7 +682,10 @@
       "away": "Real Madrid",
       "stadium": "King Abdullah Sports City Stadium",
       "result": "W",
-      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-supercopa-de-espana-por-determinar-por-determinar-2"
+      "report": "https://www.laliga.com/en-GB/match/temporada-2025-2026-supercopa-de-espana-por-determinar-por-determinar-2",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "18 September 2025",
@@ -505,7 +696,10 @@
       "away": "Barcelona",
       "stadium": "St James' Park",
       "result": "W",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2045920/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2045920/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "1 October 2025",
@@ -516,7 +710,10 @@
       "away": "Paris Saint-Germain",
       "stadium": "Estadi Olímpic Lluís Companys",
       "result": "L",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2045938/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2045938/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "21 October 2025",
@@ -527,7 +724,10 @@
       "away": "Olympiacos",
       "stadium": "Estadi Olímpic Lluís Companys",
       "result": "W",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2045939/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2045939/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "5 November 2025",
@@ -538,7 +738,10 @@
       "away": "Barcelona",
       "stadium": "Jan Breydel Stadium",
       "result": "D",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2045969/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2045969/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "25 November 2025",
@@ -549,7 +752,10 @@
       "away": "Barcelona",
       "stadium": "Stamford Bridge",
       "result": "L",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2045976/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2045976/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "9 December 2025",
@@ -560,7 +766,10 @@
       "away": "Eintracht Frankfurt",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2045995/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2045995/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "21 January 2026",
@@ -571,7 +780,10 @@
       "away": "Barcelona",
       "stadium": "Fortuna Arena",
       "result": "W",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2046023/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2046023/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "28 January 2026",
@@ -582,7 +794,10 @@
       "away": "Copenhagen",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2046033/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2046033/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     },
     {
       "date": "10 March 2026",
@@ -593,7 +808,10 @@
       "away": "Barcelona",
       "stadium": "St James' Park",
       "result": "D",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2048051/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2048051/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/02.jpg",
+      "imageExact": false
     },
     {
       "date": "18 March 2026",
@@ -604,7 +822,10 @@
       "away": "Newcastle United",
       "stadium": "Camp Nou",
       "result": "W",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2048059/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2048059/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/03.jpg",
+      "imageExact": false
     },
     {
       "date": "8 April 2026",
@@ -615,7 +836,10 @@
       "away": "Atlético Madrid",
       "stadium": "Camp Nou",
       "result": "L",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2048065/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2048065/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/04.jpg",
+      "imageExact": false
     },
     {
       "date": "14 April 2026",
@@ -626,7 +850,10 @@
       "away": "Barcelona",
       "stadium": "Riyadh Air Metropolitano",
       "result": "W",
-      "report": "https://www.uefa.com/uefachampionsleague/match/2048067/"
+      "report": "https://www.uefa.com/uefachampionsleague/match/2048067/",
+      "imageSource": "",
+      "image": "/blog-barca-history/2025-26/archive/01.jpg",
+      "imageExact": false
     }
   ]
 }

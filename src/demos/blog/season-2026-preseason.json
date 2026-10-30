@@ -1,0 +1,75 @@
+{
+  "season": "2026/27",
+  "matches": [
+    {
+      "date": "31 July 2026",
+      "competition": "AMISTOSO",
+      "round": "Pretemporada",
+      "home": "Birmingham City",
+      "score": "2–2",
+      "away": "Barcelona",
+      "stadium": "St. Andrew's Stadium",
+      "result": "D",
+      "report": "https://www.fcbarcelona.com/en/football/first-team/news/4551243/birmingham-city-2-2-3-2-fc-barcelona-preseason-opens-with-a-draw",
+      "imageSource": "https://www.fcbarcelona.com/fcbarcelona/photo/2026/07/31/3af85f67-cf0c-416a-b743-9152352b9e8b/_MGA8727.jpg",
+      "image": "/blog-barca-history/2026-27/archive/01.jpg",
+      "imageExact": true
+    },
+    {
+      "date": "8 August 2026",
+      "competition": "AMISTOSO",
+      "round": "Triangular de Udine",
+      "home": "Barcelona",
+      "score": "1–0",
+      "away": "Nottingham Forest",
+      "stadium": "Bluenergy Stadium",
+      "result": "W",
+      "report": "https://www.fcbarcelona.com/en/football/first-team/news/4556439/second-in-the-triangular",
+      "imageSource": "https://www.fcbarcelona.com/fcbarcelona/photo/2026/08/08/8a0b025c-df3b-4dff-b832-65e3e7911b8f/_MGA2030.jpg",
+      "image": "/blog-barca-history/2026-27/archive/02.jpg",
+      "imageExact": true
+    },
+    {
+      "date": "8 August 2026",
+      "competition": "AMISTOSO",
+      "round": "Triangular de Udine",
+      "home": "Udinese",
+      "score": "1–0",
+      "away": "Barcelona",
+      "stadium": "Bluenergy Stadium",
+      "result": "L",
+      "report": "https://www.fcbarcelona.com/en/football/first-team/news/4556439/second-in-the-triangular",
+      "imageSource": "https://www.fcbarcelona.com/fcbarcelona/photo/2026/08/08/8a0b025c-df3b-4dff-b832-65e3e7911b8f/_MGA2030.jpg",
+      "image": "/blog-barca-history/2026-27/archive/02.jpg",
+      "imageExact": true
+    },
+    {
+      "date": "16 August 2026",
+      "competition": "AMISTOSO",
+      "round": "Pretemporada",
+      "home": "FC Basel",
+      "score": "2–5",
+      "away": "Barcelona",
+      "stadium": "St. Jakob-Park",
+      "result": "W",
+      "report": "https://www.fcbarcelona.com/en/news/4560597/fc-basel-2-5-fc-barcelona-five-at-sankt-jakob-park/amp",
+      "imageSource": "",
+      "image": "/blog-barca-history/2026-27/archive/01.jpg",
+      "imageExact": false
+    },
+    {
+      "date": "19 August 2026",
+      "competition": "JOAN GAMPER",
+      "round": "Final",
+      "home": "Barcelona",
+      "score": "2–1",
+      "away": "Al Ahly",
+      "stadium": "Spotify Camp Nou",
+      "result": "W",
+      "report": "https://www.fcbarcelona.com/en/football/first-team/news/4562739/fc-barcelona-2-1-al-ahly-gamper-stays-at-home/featured",
+      "imageSource": "https://www.fcbarcelona.com/fcbarcelona/photo/2026/08/19/5049e4bb-50d1-42b1-b31e-464452bd2d49/_MGA7316.jpg",
+      "image": "/blog-barca-history/2026-27/archive/03.jpg",
+      "imageExact": true
+    }
+  ]
+}

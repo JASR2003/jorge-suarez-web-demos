@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { articles, flickEra, seasonStats } from './barcaArticles'
 import season2425 from './season-2024-25.json'
 import season2526 from './season-2025-26.json'
+import preseason2627 from './season-2026-preseason.json'
 import './barca-blog.css'
 
-const filters = ['TODOS', 'LALIGA', 'CHAMPIONS', 'COPA DEL REY', 'SUPERCOPA']
+const filters = ['TODOS', 'LALIGA', 'CHAMPIONS', 'COPA DEL REY', 'SUPERCOPA', 'AMISTOSO', 'JOAN GAMPER']
 const resultLabel = { W: 'VICTORIA', D: 'EMPATE', L: 'DERROTA' }
 
 const slugify = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -30,7 +31,9 @@ const historicalArticles = [
   ...season2425.matches.map((match, index) => historicalArticle(match, '2024/25', index)),
   ...season2526.matches.map((match, index) => historicalArticle(match, '2025/26', index)),
 ]
-const allArticles = [...articles, ...historicalArticles]
+const preseasonArticles2627 = preseason2627.matches.map((match, index) => historicalArticle(match, '2026/27', index))
+const allArticles = [...articles, ...preseasonArticles2627, ...historicalArticles]
+const byNewest = (first, second) => new Date(second.iso || second.date) - new Date(first.iso || first.date)
 const seasonRoutes = {
   '2026/27': '/blog/temporada-2026-27/',
   '2025/26': '/blog/temporada-2025-26/',
@@ -65,7 +68,7 @@ function MatchCard({ article, compact = false }) {
 
 function SiteHeader({ onSearch, activeSeason }) {
   return <>
-    <div className="barca-ticker"><span>ARCHIVO ERA FLICK</span><span>130 PARTIDOS DOCUMENTADOS</span><span>ACTUALIZADO 30 OCT 2026</span></div>
+    <div className="barca-ticker"><span>ARCHIVO ERA FLICK</span><span>144 PARTIDOS DOCUMENTADOS</span><span>ACTUALIZADO 30 OCT 2026</span></div>
     <header className="barca-header">
       <a className="barca-brand" href="/blog/" aria-label="La Grada, portada"><span>LA</span> GRADA</a>
       <nav aria-label="Navegación principal">
@@ -105,7 +108,7 @@ function HomePage() {
     return () => window.removeEventListener('hashchange', syncCompetition)
   }, [])
   const featured = articles[0]
-  const seasonArticles = season === '2026/27' ? articles : historicalArticles.filter((article) => article.season === season)
+  const seasonArticles = (season === '2026/27' ? [...articles, ...preseasonArticles2627] : historicalArticles.filter((article) => article.season === season)).sort(byNewest)
   const filtered = useMemo(() => seasonArticles.filter((article) => {
     const matchesFilter = filter === 'TODOS' || article.competition.includes(filter)
     const haystack = `${article.title} ${article.home} ${article.away} ${article.competition}`.toLowerCase()
@@ -138,7 +141,7 @@ function HomePage() {
 
       <section className="barca-desk" aria-labelledby="desk-title">
         <div className="barca-desk__lead"><p>LA REDACCIÓN</p><h2 id="desk-title">Más que resultados.</h2><a href={articleUrl(articles[3].slug)}><img src={articles[3].image} alt="Partido europeo del FC Barcelona" /><span>Europa</span><h3>Cómo se compite cuando el estadio juega en contra</h3><p>Lecturas tácticas, contexto y las historias que quedan detrás del marcador.</p></a></div>
-        <div className="barca-desk__column"><p className="barca-desk__label">SECCIONES</p><a href="#archivo"><span>01</span><div><b>Crónicas</b><p>Todos los partidos oficiales de la temporada.</p></div></a><a href="#era-flick"><span>02</span><div><b>Era Flick</b><p>Dos Ligas, cinco títulos y un ciclo en cifras.</p></div></a><a href="#temporadas"><span>03</span><div><b>Hemeroteca</b><p>Los 130 encuentros oficiales desde agosto de 2024.</p></div></a></div>
+        <div className="barca-desk__column"><p className="barca-desk__label">SECCIONES</p><a href="#archivo"><span>01</span><div><b>Crónicas</b><p>Todos los partidos oficiales y de pretemporada.</p></div></a><a href="#era-flick"><span>02</span><div><b>Era Flick</b><p>Dos Ligas, cinco títulos y un ciclo en cifras.</p></div></a><a href="#temporadas"><span>03</span><div><b>Hemeroteca</b><p>Los 144 encuentros disputados desde julio de 2024.</p></div></a></div>
         <aside className="barca-desk__brief"><p>EL DATO</p><strong>369</strong><h3>goles oficiales</h3><p>174 en 2024/25, 144 en 2025/26 y 51 en los primeros 13 partidos del nuevo curso.</p><small>La cifra del curso actual se actualiza con cada partido.</small></aside>
       </section>
 
@@ -171,7 +174,7 @@ function SeasonPage({ season }) {
   const [filter, setFilter] = useState('TODOS')
   const [query, setQuery] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
-  const seasonArticles = season === '2026/27' ? articles : historicalArticles.filter((article) => article.season === season)
+  const seasonArticles = (season === '2026/27' ? [...articles, ...preseasonArticles2627] : historicalArticles.filter((article) => article.season === season)).sort(byNewest)
   const filtered = useMemo(() => seasonArticles.filter((article) => {
     const matchesFilter = filter === 'TODOS' || article.competition === filter
     return matchesFilter && `${article.title} ${article.home} ${article.away}`.toLowerCase().includes(query.toLowerCase().trim())
@@ -186,7 +189,7 @@ function SeasonPage({ season }) {
     return summary
   }, { goalsFor: 0, goalsAgainst: 0 })
   const title = season === '2024/25' ? 'El año del triplete nacional.' : season === '2025/26' ? 'La confirmación del proyecto.' : 'El presente, partido a partido.'
-  const subtitle = season === '2024/25' ? '60 partidos · Liga, Copa y Supercopa' : season === '2025/26' ? '57 partidos · Liga y Supercopa' : 'Temporada en curso · actualizada al 30 de octubre'
+  const subtitle = season === '2024/25' ? '65 partidos · desde la gira de verano hasta San Mamés' : season === '2025/26' ? '61 partidos · pretemporada, Liga, Copa, Supercopa y Champions' : '18 partidos · pretemporada y competición oficial'
 
   return <div className="barca-site">
     <SiteHeader activeSeason={season} onSearch={() => setSearchOpen(true)} />
@@ -216,7 +219,7 @@ function ArticlePage({ article }) {
       <header className="barca-article__header">
         <p className="barca-kicker">CRÓNICA · {article.date}</p><h1>{article.title}</h1><p>{article.dek}</p>
       </header>
-      {article.image ? <figure className="barca-article__figure"><img src={article.image} alt={`Imagen del partido ${article.home} contra ${article.away}`} /><figcaption>Imagen de la crónica oficial del FC Barcelona.</figcaption></figure> : <div className="barca-article__poster"><span>{article.season} · {article.competition}</span><div><b>{article.home}</b><strong>{article.score}</strong><b>{article.away}</b></div><small>{article.date} · {article.stadium}</small></div>}
+      {article.image ? <figure className="barca-article__figure"><img src={article.image} alt={article.imageExact === false ? `Imagen de archivo de la temporada ${article.season}` : `Imagen del partido ${article.home} contra ${article.away}`} /><figcaption>{article.imageExact === false ? `Imagen editorial de archivo de la temporada ${article.season}; la ficha de origen no expone una fotografía propia.` : 'Imagen de la crónica oficial del FC Barcelona.'}</figcaption></figure> : <div className="barca-article__poster"><span>{article.season} · {article.competition}</span><div><b>{article.home}</b><strong>{article.score}</strong><b>{article.away}</b></div><small>{article.date} · {article.stadium}</small></div>}
       <div className="barca-article__layout">
         <aside className="barca-match-sheet"><p>FICHA DEL PARTIDO</p><div className="barca-match-sheet__score"><span>{article.home}<b>{homeGoals}</b></span><i>FINAL</i><span>{article.away}<b>{awayGoals}</b></span></div><dl><div><dt>Fecha</dt><dd>{article.date}</dd></div><div><dt>Estadio</dt><dd>{article.venue || article.stadium}</dd></div><div><dt>Competición</dt><dd>{article.competition}</dd></div><div><dt>Goles</dt><dd>{article.goals}</dd></div></dl></aside>
         <article className="barca-article__body">{article.body.map((paragraph) => <p key={paragraph.slice(0, 30)}>{paragraph}</p>)}<div className="barca-source"><span>Fuente de datos y referencia</span><a href={article.source} target="_blank" rel="noreferrer">Leer la crónica oficial ↗</a></div></article>

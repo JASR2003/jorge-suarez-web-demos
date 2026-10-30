@@ -29,8 +29,11 @@ for (const box of boxes) {
   const block = box[0]
   debugHeadings[heading] = (debugHeadings[heading] || 0) + 1
   const round = field(block, 'round')
-  if (/friendly|soccer champions|joan gamper|exhibition/i.test(round)) continue
-  const competition = /Champions/i.test(heading) ? 'CHAMPIONS'
+  const isFriendly = /friendly|soccer champions|joan gamper|exhibition/i.test(round)
+  if (isFriendly && !process.argv.includes('--include-friendlies')) continue
+  const competition = /joan gamper/i.test(round) ? 'JOAN GAMPER'
+    : isFriendly ? 'AMISTOSO'
+      : /Champions/i.test(heading) ? 'CHAMPIONS'
     : /Copa del Rey/i.test(heading) ? 'COPA DEL REY'
       : /Supercopa/i.test(heading) ? 'SUPERCOPA'
         : /La Liga/i.test(heading) ? 'LALIGA' : ''
