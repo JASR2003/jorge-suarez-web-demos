@@ -64,10 +64,10 @@ function App() {
       <main id="contenido">
         <section className="hero" id="inicio" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="eyebrow"><Sparkles aria-hidden="true" /> Laboratorio web · Colección 2026</p>
-            <h1 id="hero-title">Una colección de sitios que <em>no se repiten.</em></h1>
+            <p className="eyebrow"><Sparkles aria-hidden="true" /> Archivo digital · 10 proyectos</p>
+            <h1 id="hero-title">Sitios hechos para <em>mundos distintos.</em></h1>
             <p className="hero-lead">
-              Conceptos digitales creados para distintos negocios, públicos y objetivos. Cada demo busca demostrar una solución, no cambiarle el color a la misma página.
+              Una selección de experiencias completas para industrias reales. Entra a cada proyecto, recorre sus páginas y descubre una dirección visual diferente.
             </p>
             <div className="hero-actions">
               <a className="primary-action" href="#catalogo">Explorar demos <ArrowDownRight aria-hidden="true" /></a>
@@ -76,12 +76,12 @@ function App() {
           </div>
 
           <div className="hero-board" aria-label="Principios de la colección">
-            <div className="board-index">00 / MANIFIESTO</div>
-            <div className="board-word board-word-one">NEGOCIO</div>
-            <div className="board-word board-word-two">DISEÑO</div>
-            <div className="board-word board-word-three">FUNCIÓN</div>
+            <div className="board-index">EDICIÓN / 2026</div>
+            <div className="board-word board-word-one">10</div>
+            <div className="board-word board-word-two">PROYECTOS</div>
+            <div className="board-word board-word-three">ABIERTOS</div>
             <div className="board-seal" aria-hidden="true"><span>JS</span><small>WEB LAB</small></div>
-            <p>Cada industria merece una respuesta digital construida alrededor de su realidad.</p>
+            <p>Una colección para recorrer, comparar y entender cómo cambia una experiencia cuando cambia el negocio.</p>
           </div>
         </section>
 
@@ -160,8 +160,8 @@ function App() {
         </section>
 
         <section className="closing-section">
-          <p>La base ya está construida.</p>
-          <h2>Ahora cada demo puede crecer en su propia dirección.</h2>
+          <p>Fin del índice / Inicio del recorrido</p>
+          <h2>Elige un proyecto y entra en su mundo.</h2>
           <a href="#catalogo">Volver a las demos <ArrowUpRight aria-hidden="true" /></a>
         </section>
       </main>
