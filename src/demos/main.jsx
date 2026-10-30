@@ -10,7 +10,7 @@ const demoLoaders = {
   tienda: () => import('./tienda/StoreFull.jsx'),
   producto: () => import('./producto/ProductDigitalFull.jsx'),
   despacho: () => import('./despacho/LegalMultiPage.jsx'),
-  evento: () => import('./evento/ConcertDemo.jsx'),
+  evento: () => import('./evento/YsysmoEvent.jsx'),
   blog: () => import('./blog/BlogDemo.jsx'),
   corporativo: () => import('./corporativo/CorporativoDemo.jsx'),
 }
