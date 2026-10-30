@@ -3,6 +3,7 @@ import albumCover from '../../assets/evento/ysysmo-cover.jpg'
 import concertPhoto from '../../assets/evento/ysya-huracan-modo-diablo.jpg'
 import finalPhoto from '../../assets/evento/ysya-huracan-final.jpg'
 import stadiumPhoto from '../../assets/evento/estadio-duco.jpg'
+import { trackLinks } from './ysysmoTracks'
 import './concert.css'
 
 const chapters = [
@@ -39,14 +40,12 @@ const setlist = [
 ]
 
 const totalBefore = (blockIndex) => setlist.slice(0, blockIndex).reduce((sum, block) => sum + block[1].length, 0)
-const searchTerm = (song) => encodeURIComponent(`YSY A ${song}`)
-const musicLinks = (song) => ({
-  youtube: `https://www.youtube.com/results?search_query=${searchTerm(`${song} video oficial`)}`,
-  spotify: `https://open.spotify.com/search/${searchTerm(song)}`,
-  apple: `https://music.apple.com/ar/search?term=${searchTerm(song)}`,
-})
-
 const marqueeText = 'YSYSMO ✦ HURACÁN ✦ SPONSOR DIOS ✦ MODO DIABLO ✦ 19.12.2023 ✦ PARQUE PATRICIOS ✦ YSYSMO ✦ HURACÁN ✦ SPONSOR DIOS ✦ MODO DIABLO ✦ 19.12.2023 ✦ PARQUE PATRICIOS ✦'
+
+function PlatformLink({ href, label, song, children }) {
+  if (!href) return <span className="ys-link-unavailable" aria-label={`${label} no disponible para ${song}`}>{label}<small>—</small></span>
+  return <a href={href} target="_blank" rel="noreferrer" aria-label={`Abrir ${song} directamente en ${label}`}>{label}{children}</a>
+}
 
 export default function YsysmoArchiveV2() {
   return <div className="cv-site ysysmo-site">
@@ -94,11 +93,11 @@ export default function YsysmoArchiveV2() {
       <section className="cv-experience ys-guests" id="invitados"><div><p>04 / INVITADOS</p><h2>LA ESCENA<br />EN EL MISMO ESCENARIO.</h2></div><div>{guests.map((x, i) => <article key={x[0]}><span>{String(i + 1).padStart(2, '0')}</span><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></section>
 
       <section className="ys-setlist" id="setlist">
-        <header><p>05 / SETLIST EN ORDEN</p><h2>CUARENTA TEMAS.<br />DE PRINCIPIO A FIN.</h2><span>Orden reconstruido con el registro comunitario de Setlist.fm y crónicas del show. Los botones abren búsquedas verificables en cada plataforma.</span></header>
+        <header><p>05 / SETLIST EN ORDEN</p><h2>CUARENTA TEMAS.<br />DE PRINCIPIO A FIN.</h2><span>Orden reconstruido con Setlist.fm y crónicas del show. Cada botón disponible abre directamente la pista o el video correspondiente.</span></header>
         <div>{setlist.map((block, blockIndex) => <article key={block[0]}><span>BLOQUE {String(blockIndex + 1).padStart(2, '0')}</span><h3>{block[0]}</h3><ol>{block[1].map((song, songIndex) => {
-          const links = musicLinks(song)
+          const links = trackLinks[song] || {}
           const number = totalBefore(blockIndex) + songIndex + 1
-          return <li key={song}><b>{String(number).padStart(2, '0')}</b><span>{song}</span><div className="ys-song-links"><a href={links.youtube} target="_blank" rel="noreferrer" aria-label={`Buscar ${song} en YouTube`}>YT <Play /></a><a href={links.spotify} target="_blank" rel="noreferrer" aria-label={`Buscar ${song} en Spotify`}>Spotify <Music2 /></a><a href={links.apple} target="_blank" rel="noreferrer" aria-label={`Buscar ${song} en Apple Music`}>Apple <ExternalLink /></a></div></li>
+          return <li key={song}><b>{String(number).padStart(2, '0')}</b><span>{song}</span><div className="ys-song-links"><PlatformLink href={links.youtube} label="YT" song={song}><Play /></PlatformLink><PlatformLink href={links.spotify} label="Spotify" song={song}><Music2 /></PlatformLink><PlatformLink href={links.apple} label="Apple" song={song}><ExternalLink /></PlatformLink></div></li>
         })}</ol></article>)}</div>
       </section>
 
