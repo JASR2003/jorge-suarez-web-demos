@@ -37,8 +37,6 @@ const formatRoundEs = (value) => String(value || '')
   .replace(/Preseason/gi, 'Pretemporada')
 
 const competitionName = (value) => competitionNames[value] || value
-const hasVerifiedImage = (article) => Boolean(article.image && article.imageExact !== false)
-
 const slugify = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 const historicalArticle = (match, season, index) => {
   const opponent = match.home === 'Barcelona' ? match.away : match.home
@@ -85,7 +83,7 @@ function MatchCard({ article, compact = false }) {
   const [homeGoals, awayGoals] = scoreParts(article.score)
   return (
     <a className={`barca-match-card ${compact ? 'is-compact' : ''}`} href={articleUrl(article.slug)}>
-      {hasVerifiedImage(article) ? <div className="barca-match-card__image"><img src={article.image} alt={`Imagen verificada del partido ${article.home} contra ${article.away}`} loading="lazy" /><span>{competitionName(article.competition)}</span></div> : <div className={`barca-match-card__poster result-${article.result?.toLowerCase()}`}><span>{article.season}</span><strong>{article.score}</strong><small>{competitionName(article.competition)}</small></div>}
+      <div className={`barca-match-card__poster result-${String(article.result).toLowerCase()}`}><span>{article.season || '2026/27'}</span><strong>{article.score}</strong><small>{competitionName(article.competition)}</small></div>
       <div className="barca-match-card__body">
         <p className="barca-eyebrow">{formatDateEs(article.date)} · {formatRoundEs(article.round)}</p>
         <div className="barca-scoreline" aria-label={`${article.home} ${homeGoals}, ${article.away} ${awayGoals}`}>
@@ -93,7 +91,7 @@ function MatchCard({ article, compact = false }) {
           <span>{article.away}</span><strong>{awayGoals}</strong>
         </div>
         {!compact && <><h3>{article.title}</h3><p>{article.dek}</p></>}
-        <span className="barca-read">Leer crónica <b aria-hidden="true">→</b></span>
+        <span className="barca-read">Ver ficha del partido <b aria-hidden="true">→</b></span>
       </div>
     </a>
   )
@@ -153,7 +151,7 @@ function HomePage() {
     <SearchPanel open={searchOpen} onClose={() => setSearchOpen(false)} query={query} setQuery={setQuery} />
     <main>
       <section className="barca-hero" aria-labelledby="latest-title">
-        <a href={articleUrl(featured.slug)} className="barca-hero__image"><img src={featured.image} alt="FC Barcelona contra Real Madrid en el partido destacado" /></a>
+        <a href={articleUrl(featured.slug)} className="barca-hero__scoreboard" aria-label={`Abrir la ficha de ${featured.home} contra ${featured.away}`}><span>{featured.competition}</span><div><b>{featured.home}</b><strong>{featured.score}</strong><b>{featured.away}</b></div><small>{formatDateEs(featured.date)} · {featured.venue}</small></a>
         <div className="barca-hero__story">
           <p className="barca-kicker">ÚLTIMA HORA · {featured.competition}</p>
           <h1 id="latest-title"><a href={articleUrl(featured.slug)}>{featured.title}</a></h1>
@@ -173,7 +171,7 @@ function HomePage() {
       </section>
 
       <section className="barca-desk" aria-labelledby="desk-title">
-        <div className="barca-desk__lead"><p>LA REDACCIÓN</p><h2 id="desk-title">Más que resultados.</h2><a href={articleUrl(articles[3].slug)}><img src={articles[3].image} alt="Partido europeo del FC Barcelona" /><span>Europa</span><h3>Cómo se compite cuando el estadio juega en contra</h3><p>Lecturas tácticas, contexto y las historias que quedan detrás del marcador.</p></a></div>
+        <div className="barca-desk__lead"><p>LA REDACCIÓN</p><h2 id="desk-title">Más que resultados.</h2><a href={articleUrl(articles[3].slug)}><div className="barca-desk__score"><span>{articles[3].home}</span><strong>{articles[3].score}</strong><span>{articles[3].away}</span></div><span>Europa</span><h3>Cómo se compite cuando el estadio juega en contra</h3><p>Lecturas tácticas, contexto y las historias que quedan detrás del marcador.</p></a></div>
         <div className="barca-desk__column"><p className="barca-desk__label">SECCIONES</p><a href="#archivo"><span>01</span><div><b>Crónicas</b><p>Todos los partidos oficiales y de pretemporada.</p></div></a><a href="#era-flick"><span>02</span><div><b>Era Flick</b><p>Dos Ligas, cinco títulos y un ciclo en cifras.</p></div></a><a href="#temporadas"><span>03</span><div><b>Hemeroteca</b><p>Los 144 encuentros disputados desde julio de 2024.</p></div></a></div>
         <aside className="barca-desk__brief"><p>EL DATO</p><strong>369</strong><h3>goles oficiales</h3><p>174 en 2024/25, 144 en 2025/26 y 51 en los primeros 13 partidos del nuevo curso.</p><small>La cifra del curso actual se actualiza con cada partido.</small></aside>
       </section>
@@ -241,6 +239,31 @@ function SeasonPage({ season }) {
   </div>
 }
 
+function SquadList({ title, players }) {
+  return <section className="match-squad"><h3>{title}</h3>{players?.length ? <ol>{players.map((player) => <li key={`${player.number || ''}-${player.name}`}><span>{player.number || '—'}</span><b>{player.name}</b><small>{player.position || ''}</small></li>)}</ol> : <p className="match-data-empty">El acta enlazada no ofrece todavía un once verificable para esta ficha.</p>}</section>
+}
+
+function MatchCentre({ article }) {
+  const details = article.details || {}
+  const goalEvents = details.events || (!article.goals?.startsWith('Consulta') ? article.goals.split(' · ').filter(Boolean).map((label) => ({ type: 'goal', label })) : [])
+  const substitutions = details.substitutions || []
+  const cards = details.cards || []
+  return <section className="match-centre" aria-labelledby="match-centre-title">
+    <div className="match-centre__heading"><p>ACTA Y DESARROLLO</p><h2 id="match-centre-title">El partido, dato a dato</h2><span>La información solo se publica cuando puede contrastarse con la fuente enlazada.</span></div>
+    <div className="match-centre__lineups">
+      <SquadList title={`Once de ${article.home}`} players={details.homeLineup} />
+      <div className="match-centre__formation"><span>FORMACIONES</span><strong>{details.homeFormation || '—'}</strong><i>contra</i><strong>{details.awayFormation || '—'}</strong></div>
+      <SquadList title={`Once de ${article.away}`} players={details.awayLineup} />
+    </div>
+    <div className="match-centre__records">
+      <section><h3>Goles e incidencias</h3>{goalEvents.length ? <ol className="match-timeline">{goalEvents.map((event, index) => <li key={`${event.minute || ''}-${event.label}-${index}`}><time>{event.minute || 'GOL'}</time><div><b>{event.label}</b>{event.assist && <span>Asistencia: {event.assist}</span>}</div></li>)}</ol> : <p className="match-data-empty">La fuente consultada no detalla los goleadores de este encuentro.</p>}</section>
+      <section><h3>Cambios</h3>{substitutions.length ? <ol className="match-substitutions">{substitutions.map((change, index) => <li key={`${change.minute}-${index}`}><time>{change.minute}</time><div><b>Entra {change.in}</b><span>Sale {change.out} · {change.team}</span></div></li>)}</ol> : <p className="match-data-empty">Los cambios todavía no están disponibles en el acta de esta ficha.</p>}</section>
+      <section><h3>Tarjetas</h3>{cards.length ? <ol className="match-cards">{cards.map((card, index) => <li key={`${card.minute}-${card.player}-${index}`}><span className={`card card-${card.color || 'yellow'}`} aria-hidden="true" /><div><b>{card.player}</b><small>{card.minute} · {card.team}</small></div></li>)}</ol> : <p className="match-data-empty">No hay tarjetas verificadas cargadas para este partido.</p>}</section>
+    </div>
+    <a className="match-centre__source" href={article.source} target="_blank" rel="noreferrer">Consultar el acta o crónica de origen <span>↗</span></a>
+  </section>
+}
+
 function ArticlePage({ article }) {
   const [subscribed, setSubscribed] = useState(false)
   const related = allArticles.filter((item) => item.slug !== article.slug && item.competition === article.competition && (item.season || '2026/27') === (article.season || '2026/27')).slice(0, 3)
@@ -252,11 +275,12 @@ function ArticlePage({ article }) {
       <header className="barca-article__header">
         <p className="barca-kicker">CRÓNICA · {formatDateEs(article.date)}</p><h1>{article.title}</h1><p>{article.dek}</p>
       </header>
-      {hasVerifiedImage(article) ? <figure className="barca-article__figure"><img src={article.image} alt={`Imagen verificada del partido ${article.home} contra ${article.away}`} /><figcaption>Imagen vinculada a la crónica específica de este encuentro.</figcaption></figure> : <div className="barca-article__poster"><span>{article.season} · {competitionName(article.competition)}</span><div><b>{article.home}</b><strong>{article.score}</strong><b>{article.away}</b></div><small>{formatDateEs(article.date)} · {article.stadium}</small></div>}
+      <div className="barca-article__poster"><span>{article.season || '2026/27'} · {competitionName(article.competition)}</span><div><b>{article.home}</b><strong>{article.score}</strong><b>{article.away}</b></div><small>{formatDateEs(article.date)} · {article.venue || article.stadium}</small></div>
       <div className="barca-article__layout">
         <aside className="barca-match-sheet"><p>FICHA DEL PARTIDO</p><div className="barca-match-sheet__score"><span>{article.home}<b>{homeGoals}</b></span><i>FINAL</i><span>{article.away}<b>{awayGoals}</b></span></div><dl><div><dt>Fecha</dt><dd>{formatDateEs(article.date)}</dd></div><div><dt>Estadio</dt><dd>{article.venue || article.stadium}</dd></div><div><dt>Competición</dt><dd>{competitionName(article.competition)}</dd></div><div><dt>Goles</dt><dd>{article.goals}</dd></div></dl></aside>
         <article className="barca-article__body">{article.body.map((paragraph) => <p key={paragraph.slice(0, 30)}>{paragraph}</p>)}<div className="barca-source"><span>Fuente de datos y referencia</span><a href={article.source} target="_blank" rel="noreferrer">Leer la crónica oficial ↗</a></div></article>
       </div>
+      <MatchCentre article={article} />
       <section className="barca-related"><div className="barca-section-heading"><p>SIGUE LEYENDO</p><h2>Más de {competitionName(article.competition)}</h2></div><div>{related.map((item) => <MatchCard key={item.slug} article={item} compact />)}</div></section>
       <section className="barca-newsletter"><div><p>ARCHIVO 26/27</p><h2>Todos los partidos, un solo relato.</h2></div>{subscribed ? <p className="barca-success">Suscripción registrada en esta demo.</p> : <button className="barca-newsletter__standalone" onClick={() => setSubscribed(true)}>Seguir la temporada →</button>}</section>
     </main>
