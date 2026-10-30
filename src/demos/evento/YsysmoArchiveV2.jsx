@@ -46,6 +46,8 @@ const musicLinks = (song) => ({
   apple: `https://music.apple.com/ar/search?term=${searchTerm(song)}`,
 })
 
+const marqueeText = 'YSYSMO ✦ HURACÁN ✦ SPONSOR DIOS ✦ MODO DIABLO ✦ 19.12.2023 ✦ PARQUE PATRICIOS ✦ YSYSMO ✦ HURACÁN ✦ SPONSOR DIOS ✦ MODO DIABLO ✦ 19.12.2023 ✦ PARQUE PATRICIOS ✦'
+
 export default function YsysmoArchiveV2() {
   return <div className="cv-site ysysmo-site">
     <a className="demo-skip" href="#concert-main">Saltar al contenido</a>
@@ -67,7 +69,9 @@ export default function YsysmoArchiveV2() {
         <a href="#historia" className="cv-scroll">BAJÁ AL EPICENTRO <ArrowDown /></a>
       </section>
 
-      <section className="cv-marquee"><div>YSYSMO ✦ HURACÁN ✦ SPONSOR DIOS ✦ MODO DIABLO ✦ 19.12.2023 ✦ PARQUE PATRICIOS ✦&nbsp;</div></section>
+      <section className="cv-marquee" aria-label="YSYSMO, Huracán, Sponsor Dios, Modo Diablo, 19 de diciembre de 2023, Parque Patricios">
+        <div className="cv-marquee-track"><span>{marqueeText}</span><span aria-hidden="true">{marqueeText}</span></div>
+      </section>
 
       <section className="cv-lineup y-history" id="historia">
         <header><p>01 / ANTES DEL SISMO</p><h2>DEL QUINTO ESCALÓN<br />A UNA CANCHA LLENA.</h2></header>
