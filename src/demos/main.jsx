@@ -11,7 +11,7 @@ const demoLoaders = {
   producto: () => import('./producto/ProductDigitalFull.jsx'),
   despacho: () => import('./despacho/LegalMultiPage.jsx'),
   evento: () => import('./evento/YsysmoArchiveV2.jsx'),
-  blog: () => import('./blog/BlogDemo.jsx'),
+  blog: () => import('./blog/BarcaBlog.jsx'),
   corporativo: () => import('./corporativo/CorporativoDemo.jsx'),
 }
 
