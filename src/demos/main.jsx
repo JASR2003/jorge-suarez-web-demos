@@ -12,7 +12,7 @@ const demoLoaders = {
   despacho: () => import('./despacho/LegalMultiPage.jsx'),
   evento: () => import('./evento/YsysmoArchiveV2.jsx'),
   blog: () => import('./blog/BarcaBlog.jsx'),
-  corporativo: () => import('./corporativo/CorporativoDemo.jsx'),
+  corporativo: () => import('./corporativo/NodoCorporativo.jsx'),
 }
 
 const demoName = document.body.dataset.demo
