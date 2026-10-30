@@ -13,10 +13,16 @@ export function DemoCard({ demo }) {
         <span>{demo.sector}</span>
       </div>
 
-      <div className="demo-visual" aria-hidden="true">
-        <span>{demo.monogram}</span>
-        <i className="shape shape-one" />
-        <i className="shape shape-two" />
+      <div className={`demo-thumbnail preview-${demo.slug} ${demo.previewType ? `preview-${demo.previewType}` : ''}`} aria-hidden="true">
+        <div className="thumbnail-browser"><i/><i/><i/><span>{demo.href}</span></div>
+        {demo.thumbnail && <img src={demo.thumbnail} alt="" loading="lazy" />}
+        <div className="thumbnail-overlay">
+          <small>{demo.previewMeta}</small>
+          <strong>{demo.previewTitle}</strong>
+          <span>Explorar proyecto ↗</span>
+        </div>
+        {demo.previewType === 'legal' && <div className="legal-lines"><i/><i/><i/></div>}
+        {demo.previewType === 'editorial' && <div className="editorial-score"><b>4</b><span>—</span><b>0</b></div>}
       </div>
 
       <div className="demo-card-copy">
@@ -26,7 +32,7 @@ export function DemoCard({ demo }) {
       </div>
 
       <div className="demo-card-footer">
-        <span>Ver demo básica</span>
+        <span>Abrir proyecto</span>
         <ArrowUpRight aria-hidden="true" />
       </div>
     </a>
