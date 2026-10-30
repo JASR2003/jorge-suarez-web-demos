@@ -93,10 +93,10 @@ function App() {
 
         <section className="catalog-section" id="catalogo" aria-labelledby="catalog-title">
           <div className="section-intro">
-            <p className="section-number">01 / Demos básicas</p>
+            <p className="section-number">01 / Galería de proyectos</p>
             <div>
-              <h2 id="catalog-title">Diez puntos de partida, diez direcciones distintas.</h2>
-              <p>Cada versión básica ya responde a una industria, una acción comercial y un lenguaje visual propio. En las siguientes etapas refinaremos contenido, funciones y personalidad.</p>
+              <h2 id="catalog-title">Diez proyectos, diez identidades reconocibles.</h2>
+              <p>Explora cada sitio desde una miniatura construida con su propio lenguaje visual. No son temas intercambiables: cada proyecto responde a una industria, una acción comercial y una estructura diferente.</p>
             </div>
           </div>
 
