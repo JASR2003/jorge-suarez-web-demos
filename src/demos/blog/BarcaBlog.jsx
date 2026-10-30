@@ -31,6 +31,11 @@ const historicalArticles = [
   ...season2526.matches.map((match, index) => historicalArticle(match, '2025/26', index)),
 ]
 const allArticles = [...articles, ...historicalArticles]
+const seasonRoutes = {
+  '2026/27': '/blog/temporada-2026-27/',
+  '2025/26': '/blog/temporada-2025-26/',
+  '2024/25': '/blog/temporada-2024-25/',
+}
 
 function articleUrl(slug) {
   return `#articulo/${slug}`
@@ -58,13 +63,13 @@ function MatchCard({ article, compact = false }) {
   )
 }
 
-function SiteHeader({ onSearch }) {
+function SiteHeader({ onSearch, activeSeason }) {
   return <>
-    <div className="barca-ticker"><span>TEMPORADA 26/27</span><span>13 PARTIDOS DOCUMENTADOS</span><span>ACTUALIZADO 30 OCT 2026</span></div>
+    <div className="barca-ticker"><span>ARCHIVO ERA FLICK</span><span>130 PARTIDOS DOCUMENTADOS</span><span>ACTUALIZADO 30 OCT 2026</span></div>
     <header className="barca-header">
-      <a className="barca-brand" href="#portada" aria-label="La Grada, portada"><span>LA</span> GRADA<small>BARCELONA · ARCHIVO DE TEMPORADA</small></a>
+      <a className="barca-brand" href="/blog/" aria-label="La Grada, portada"><span>LA</span> GRADA</a>
       <nav aria-label="Navegación principal">
-        <a href="#portada">Portada</a><a href="#era-flick">Era Flick</a><a href="#laliga">LaLiga</a><a href="#champions">Champions</a><a href="#archivo">Archivo</a>
+        <a href="/blog/">Portada</a>{Object.entries(seasonRoutes).map(([season, href]) => <a className={activeSeason === season ? 'active' : ''} href={href} key={season}>{season}</a>)}<a href="/blog/#era-flick">Era Flick</a>
       </nav>
       <button className="barca-search-button" onClick={onSearch} aria-label="Abrir buscador">Buscar <span aria-hidden="true">⌕</span></button>
     </header>
@@ -146,7 +151,7 @@ function HomePage() {
       </section>
 
       <section className="barca-section" id="archivo">
-        <div className="barca-season-switcher" id="temporadas"><span>SELECCIONA TEMPORADA</span><div>{['2026/27', '2025/26', '2024/25'].map((item) => <button key={item} className={season === item ? 'active' : ''} onClick={() => { setSeason(item); setFilter('TODOS'); setQuery('') }}>{item}</button>)}</div></div>
+        <div className="barca-season-switcher" id="temporadas"><span>VER TEMPORADA EN SU PROPIA PÁGINA</span><div>{Object.entries(seasonRoutes).map(([item, href]) => <a key={item} className={season === item ? 'active' : ''} href={href}>{item}</a>)}</div></div>
         <div className="barca-archive-heading"><div><p>{season === '2026/27' ? 'CRÓNICA A CRÓNICA' : 'HEMEROTECA COMPLETA'}</p><h2>Archivo {season}</h2><span>{seasonArticles.length} partidos oficiales</span></div><div className="barca-filters" aria-label="Filtrar artículos">{filters.filter((item) => item === 'TODOS' || seasonArticles.some((article) => article.competition === item)).map((item) => <button className={filter === item ? 'active' : ''} onClick={() => setFilter(item)} key={item}>{item}</button>)}</div></div>
         {query && <p className="barca-query">Resultados para “{query}” · <button onClick={() => setQuery('')}>Limpiar</button></p>}
         <div className="barca-archive-grid">{filtered.map((article) => <MatchCard key={article.slug} article={article} />)}</div>
@@ -162,12 +167,50 @@ function HomePage() {
   </div>
 }
 
+function SeasonPage({ season }) {
+  const [filter, setFilter] = useState('TODOS')
+  const [query, setQuery] = useState('')
+  const [searchOpen, setSearchOpen] = useState(false)
+  const seasonArticles = season === '2026/27' ? articles : historicalArticles.filter((article) => article.season === season)
+  const filtered = useMemo(() => seasonArticles.filter((article) => {
+    const matchesFilter = filter === 'TODOS' || article.competition === filter
+    return matchesFilter && `${article.title} ${article.home} ${article.away}`.toLowerCase().includes(query.toLowerCase().trim())
+  }), [filter, query, season])
+  const stats = seasonArticles.reduce((summary, article) => {
+    const [home, away] = scoreParts(article.score).map(Number)
+    const barcaHome = article.home.includes('BARCELONA') || article.home === 'Barcelona'
+    summary.goalsFor += barcaHome ? home : away
+    summary.goalsAgainst += barcaHome ? away : home
+    const result = resultLabel[article.result] || article.result
+    summary[result] = (summary[result] || 0) + 1
+    return summary
+  }, { goalsFor: 0, goalsAgainst: 0 })
+  const title = season === '2024/25' ? 'El año del triplete nacional.' : season === '2025/26' ? 'La confirmación del proyecto.' : 'El presente, partido a partido.'
+  const subtitle = season === '2024/25' ? '60 partidos · Liga, Copa y Supercopa' : season === '2025/26' ? '57 partidos · Liga y Supercopa' : 'Temporada en curso · actualizada al 30 de octubre'
+
+  return <div className="barca-site">
+    <SiteHeader activeSeason={season} onSearch={() => setSearchOpen(true)} />
+    <SearchPanel open={searchOpen} onClose={() => setSearchOpen(false)} query={query} setQuery={setQuery} />
+    <main>
+      <header className={`season-masthead season-${season.replace('/', '-')}`}><div><p>HEMEROTECA · {season}</p><h1>{title}</h1><span>{subtitle}</span></div><strong>{season}</strong></header>
+      <section className="barca-stats" aria-label={`Balance ${season}`}><div><strong>{seasonArticles.length}</strong><span>Partidos</span></div><div><strong>{stats.VICTORIA || 0}</strong><span>Victorias</span></div><div><strong>{stats.goalsFor}</strong><span>Goles a favor</span></div><div><strong>{stats.goalsAgainst}</strong><span>Goles en contra</span></div></section>
+      <section className="barca-section" id="archivo">
+        <div className="barca-season-breadcrumb"><a href="/blog/">Portada</a><span>→</span><b>Temporada {season}</b></div>
+        <div className="barca-archive-heading"><div><p>CALENDARIO COMPLETO</p><h2>Todos los partidos</h2><span>{filtered.length} resultados</span></div><div className="barca-filters">{filters.filter((item) => item === 'TODOS' || seasonArticles.some((article) => article.competition === item)).map((item) => <button className={filter === item ? 'active' : ''} onClick={() => setFilter(item)} key={item}>{item}</button>)}</div></div>
+        {query && <p className="barca-query">Resultados para “{query}” · <button onClick={() => setQuery('')}>Limpiar</button></p>}
+        <div className="barca-archive-grid">{filtered.map((article) => <MatchCard key={article.slug} article={article} />)}</div>
+      </section>
+    </main>
+    <Footer />
+  </div>
+}
+
 function ArticlePage({ article }) {
   const [subscribed, setSubscribed] = useState(false)
   const related = allArticles.filter((item) => item.slug !== article.slug && item.competition === article.competition && (item.season || '2026/27') === (article.season || '2026/27')).slice(0, 3)
   const [homeGoals, awayGoals] = scoreParts(article.score)
   return <div className="barca-site">
-    <SiteHeader onSearch={() => { window.location.hash = '#archivo' }} />
+    <SiteHeader activeSeason={article.season || '2026/27'} onSearch={() => { window.location.hash = '#archivo' }} />
     <main className="barca-article">
       <div className="barca-article__top"><a href="#portada">← Volver a portada</a><span>{article.competition} · {article.round}</span></div>
       <header className="barca-article__header">
@@ -175,7 +218,7 @@ function ArticlePage({ article }) {
       </header>
       {article.image ? <figure className="barca-article__figure"><img src={article.image} alt={`Imagen del partido ${article.home} contra ${article.away}`} /><figcaption>Imagen de la crónica oficial del FC Barcelona.</figcaption></figure> : <div className="barca-article__poster"><span>{article.season} · {article.competition}</span><div><b>{article.home}</b><strong>{article.score}</strong><b>{article.away}</b></div><small>{article.date} · {article.stadium}</small></div>}
       <div className="barca-article__layout">
-        <aside className="barca-match-sheet"><p>FICHA DEL PARTIDO</p><div className="barca-match-sheet__score"><span>{article.home}<b>{homeGoals}</b></span><i>FINAL</i><span>{article.away}<b>{awayGoals}</b></span></div><dl><div><dt>Fecha</dt><dd>{article.date}</dd></div><div><dt>Estadio</dt><dd>{article.venue}</dd></div><div><dt>Competición</dt><dd>{article.competition}</dd></div><div><dt>Goles</dt><dd>{article.goals}</dd></div></dl></aside>
+        <aside className="barca-match-sheet"><p>FICHA DEL PARTIDO</p><div className="barca-match-sheet__score"><span>{article.home}<b>{homeGoals}</b></span><i>FINAL</i><span>{article.away}<b>{awayGoals}</b></span></div><dl><div><dt>Fecha</dt><dd>{article.date}</dd></div><div><dt>Estadio</dt><dd>{article.venue || article.stadium}</dd></div><div><dt>Competición</dt><dd>{article.competition}</dd></div><div><dt>Goles</dt><dd>{article.goals}</dd></div></dl></aside>
         <article className="barca-article__body">{article.body.map((paragraph) => <p key={paragraph.slice(0, 30)}>{paragraph}</p>)}<div className="barca-source"><span>Fuente de datos y referencia</span><a href={article.source} target="_blank" rel="noreferrer">Leer la crónica oficial ↗</a></div></article>
       </div>
       <section className="barca-related"><div className="barca-section-heading"><p>SIGUE LEYENDO</p><h2>Más de {article.competition.toLowerCase()}</h2></div><div>{related.map((item) => <MatchCard key={item.slug} article={item} compact />)}</div></section>
@@ -198,5 +241,9 @@ export default function BarcaBlog() {
   }, [])
   const slug = route.startsWith('#articulo/') ? route.replace('#articulo/', '') : null
   const article = slug ? allArticles.find((item) => item.slug === slug) : null
-  return article ? <ArticlePage article={article} /> : <HomePage />
+  const path = window.location.pathname
+  const pageSeason = Object.entries(seasonRoutes).find(([, href]) => path.startsWith(href))?.[0]
+  if (article) return <ArticlePage article={article} />
+  if (pageSeason) return <SeasonPage season={pageSeason} />
+  return <HomePage />
 }
