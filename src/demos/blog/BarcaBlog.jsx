@@ -1,8 +1,36 @@
 import { useEffect, useMemo, useState } from 'react'
 import { articles, flickEra, seasonStats } from './barcaArticles'
+import season2425 from './season-2024-25.json'
+import season2526 from './season-2025-26.json'
 import './barca-blog.css'
 
-const filters = ['TODOS', 'LALIGA', 'CHAMPIONS']
+const filters = ['TODOS', 'LALIGA', 'CHAMPIONS', 'COPA DEL REY', 'SUPERCOPA']
+const resultLabel = { W: 'VICTORIA', D: 'EMPATE', L: 'DERROTA' }
+
+const slugify = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+const historicalArticle = (match, season, index) => {
+  const opponent = match.home === 'Barcelona' ? match.away : match.home
+  const round = String(match.round).replace(/<br>/g, ' · ')
+  const slug = `${season.replace('/', '-')}-${slugify(match.date)}-${slugify(opponent)}`
+  return {
+    ...match, slug, season, round, opponent, historical: true,
+    source: match.report,
+    title: `${match.home} ${match.score} ${match.away}: la ficha del partido`,
+    dek: `${resultLabel[match.result]} azulgrana en ${match.competition.toLowerCase()}, correspondiente a ${round || 'la temporada regular'}.`,
+    goals: 'Consulta la ficha enlazada para el detalle de goleadores.',
+    body: [
+      `El archivo de la era Flick registra este ${match.home} ${match.score} ${match.away}, disputado el ${match.date}. El encuentro formó parte de ${match.competition.toLowerCase()} y terminó con ${resultLabel[match.result].toLowerCase()} para el FC Barcelona.`,
+      `La cita se jugó en ${match.stadium || 'el estadio del equipo local'}. Esta ficha permite recorrer el calendario completo sin reducir la historia del ciclo únicamente a las finales o a los partidos más recordados.`,
+      `El resultado ocupa el lugar ${index + 1} dentro del archivo de la temporada ${season}. Para alineaciones, goleadores e incidencias se conserva el acceso a la ficha de la competición utilizada como referencia.`,
+    ],
+  }
+}
+
+const historicalArticles = [
+  ...season2425.matches.map((match, index) => historicalArticle(match, '2024/25', index)),
+  ...season2526.matches.map((match, index) => historicalArticle(match, '2025/26', index)),
+]
+const allArticles = [...articles, ...historicalArticles]
 
 function articleUrl(slug) {
   return `#articulo/${slug}`
@@ -16,10 +44,7 @@ function MatchCard({ article, compact = false }) {
   const [homeGoals, awayGoals] = scoreParts(article.score)
   return (
     <a className={`barca-match-card ${compact ? 'is-compact' : ''}`} href={articleUrl(article.slug)}>
-      <div className="barca-match-card__image">
-        <img src={article.image} alt="" loading="lazy" />
-        <span>{article.competition}</span>
-      </div>
+      {article.image ? <div className="barca-match-card__image"><img src={article.image} alt="" loading="lazy" /><span>{article.competition}</span></div> : <div className={`barca-match-card__poster result-${article.result?.toLowerCase()}`}><span>{article.season}</span><strong>{article.score}</strong><small>{article.competition}</small></div>}
       <div className="barca-match-card__body">
         <p className="barca-eyebrow">{article.date} · {article.round}</p>
         <div className="barca-scoreline" aria-label={`${article.home} ${homeGoals}, ${article.away} ${awayGoals}`}>
@@ -60,6 +85,7 @@ function SearchPanel({ open, onClose, query, setQuery }) {
 
 function HomePage() {
   const [filter, setFilter] = useState('TODOS')
+  const [season, setSeason] = useState('2026/27')
   const [query, setQuery] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
   const [subscribed, setSubscribed] = useState(false)
@@ -74,11 +100,12 @@ function HomePage() {
     return () => window.removeEventListener('hashchange', syncCompetition)
   }, [])
   const featured = articles[0]
-  const filtered = useMemo(() => articles.filter((article) => {
+  const seasonArticles = season === '2026/27' ? articles : historicalArticles.filter((article) => article.season === season)
+  const filtered = useMemo(() => seasonArticles.filter((article) => {
     const matchesFilter = filter === 'TODOS' || article.competition.includes(filter)
     const haystack = `${article.title} ${article.home} ${article.away} ${article.competition}`.toLowerCase()
     return matchesFilter && haystack.includes(query.toLowerCase().trim())
-  }), [filter, query])
+  }), [filter, query, season])
 
   return <div className="barca-site">
     <SiteHeader onSearch={() => setSearchOpen(true)} />
@@ -104,16 +131,23 @@ function HomePage() {
         <div className="barca-recent__grid">{articles.slice(1, 4).map((article) => <MatchCard key={article.slug} article={article} compact />)}</div>
       </section>
 
+      <section className="barca-desk" aria-labelledby="desk-title">
+        <div className="barca-desk__lead"><p>LA REDACCIÓN</p><h2 id="desk-title">Más que resultados.</h2><a href={articleUrl(articles[3].slug)}><img src={articles[3].image} alt="Partido europeo del FC Barcelona" /><span>Europa</span><h3>Cómo se compite cuando el estadio juega en contra</h3><p>Lecturas tácticas, contexto y las historias que quedan detrás del marcador.</p></a></div>
+        <div className="barca-desk__column"><p className="barca-desk__label">SECCIONES</p><a href="#archivo"><span>01</span><div><b>Crónicas</b><p>Todos los partidos oficiales de la temporada.</p></div></a><a href="#era-flick"><span>02</span><div><b>Era Flick</b><p>Dos Ligas, cinco títulos y un ciclo en cifras.</p></div></a><a href="#temporadas"><span>03</span><div><b>Hemeroteca</b><p>Los 130 encuentros oficiales desde agosto de 2024.</p></div></a></div>
+        <aside className="barca-desk__brief"><p>EL DATO</p><strong>369</strong><h3>goles oficiales</h3><p>174 en 2024/25, 144 en 2025/26 y 51 en los primeros 13 partidos del nuevo curso.</p><small>La cifra del curso actual se actualiza con cada partido.</small></aside>
+      </section>
+
       <section className="flick-era" id="era-flick">
         <div className="flick-era__intro"><p>DESDE EL 29 DE MAYO DE 2024</p><h2>La era Flick,<br />en cifras.</h2><p>La temporada actual es el foco diario. Debajo vive el contexto completo del ciclo: sus campañas, sus cifras y los hitos que explican cómo llegó el Barça hasta aquí.</p></div>
         <div className="flick-era__numbers" aria-label="Balance oficial de la era Flick hasta el 25 de octubre de 2026"><div><strong>{flickEra.stats.matches}</strong><span>partidos oficiales</span></div><div><strong>{flickEra.stats.wins}</strong><span>victorias</span></div><div><strong>{flickEra.stats.trophies}</strong><span>títulos</span></div><div><strong>2</strong><span>Ligas seguidas</span></div></div>
         <div className="flick-seasons">{flickEra.seasons.map((season) => <article key={season.season}><div><span>{season.label}</span><strong>{season.season}</strong></div><h3>{season.title}</h3><b>{season.record}</b><p>{season.text}</p><a href={season.source} target="_blank" rel="noreferrer">Consultar historia y datos ↗</a></article>)}</div>
         <div className="flick-milestones">{flickEra.milestones.map((item) => <div key={item.title}><strong>{item.value}</strong><h3>{item.title}</h3><p>{item.text}</p></div>)}</div>
-        <p className="flick-era__note">Balance acumulado: 129 PJ · 99 V · 10 E · 20 D. Incluye los 116 encuentros de las dos primeras campañas y los 13 partidos oficiales documentados de 2026/27.</p>
+        <p className="flick-era__note">Balance acumulado: 130 PJ · 99 V · 10 E · 21 D. Incluye los 117 encuentros de las dos primeras campañas y los 13 partidos oficiales documentados de 2026/27.</p>
       </section>
 
       <section className="barca-section" id="archivo">
-        <div className="barca-archive-heading"><div><p>CRÓNICA A CRÓNICA</p><h2>Archivo 2026/27</h2></div><div className="barca-filters" aria-label="Filtrar artículos">{filters.map((item) => <button className={filter === item ? 'active' : ''} onClick={() => setFilter(item)} key={item}>{item}</button>)}</div></div>
+        <div className="barca-season-switcher" id="temporadas"><span>SELECCIONA TEMPORADA</span><div>{['2026/27', '2025/26', '2024/25'].map((item) => <button key={item} className={season === item ? 'active' : ''} onClick={() => { setSeason(item); setFilter('TODOS'); setQuery('') }}>{item}</button>)}</div></div>
+        <div className="barca-archive-heading"><div><p>{season === '2026/27' ? 'CRÓNICA A CRÓNICA' : 'HEMEROTECA COMPLETA'}</p><h2>Archivo {season}</h2><span>{seasonArticles.length} partidos oficiales</span></div><div className="barca-filters" aria-label="Filtrar artículos">{filters.filter((item) => item === 'TODOS' || seasonArticles.some((article) => article.competition === item)).map((item) => <button className={filter === item ? 'active' : ''} onClick={() => setFilter(item)} key={item}>{item}</button>)}</div></div>
         {query && <p className="barca-query">Resultados para “{query}” · <button onClick={() => setQuery('')}>Limpiar</button></p>}
         <div className="barca-archive-grid">{filtered.map((article) => <MatchCard key={article.slug} article={article} />)}</div>
         {!filtered.length && <div className="barca-empty"><strong>No encontramos partidos.</strong><button onClick={() => { setQuery(''); setFilter('TODOS') }}>Mostrar todo el archivo</button></div>}
@@ -130,7 +164,7 @@ function HomePage() {
 
 function ArticlePage({ article }) {
   const [subscribed, setSubscribed] = useState(false)
-  const related = articles.filter((item) => item.slug !== article.slug && item.competition === article.competition).slice(0, 3)
+  const related = allArticles.filter((item) => item.slug !== article.slug && item.competition === article.competition && (item.season || '2026/27') === (article.season || '2026/27')).slice(0, 3)
   const [homeGoals, awayGoals] = scoreParts(article.score)
   return <div className="barca-site">
     <SiteHeader onSearch={() => { window.location.hash = '#archivo' }} />
@@ -139,7 +173,7 @@ function ArticlePage({ article }) {
       <header className="barca-article__header">
         <p className="barca-kicker">CRÓNICA · {article.date}</p><h1>{article.title}</h1><p>{article.dek}</p>
       </header>
-      <figure className="barca-article__figure"><img src={article.image} alt={`Imagen del partido ${article.home} contra ${article.away}`} /><figcaption>Imagen de la crónica oficial del FC Barcelona.</figcaption></figure>
+      {article.image ? <figure className="barca-article__figure"><img src={article.image} alt={`Imagen del partido ${article.home} contra ${article.away}`} /><figcaption>Imagen de la crónica oficial del FC Barcelona.</figcaption></figure> : <div className="barca-article__poster"><span>{article.season} · {article.competition}</span><div><b>{article.home}</b><strong>{article.score}</strong><b>{article.away}</b></div><small>{article.date} · {article.stadium}</small></div>}
       <div className="barca-article__layout">
         <aside className="barca-match-sheet"><p>FICHA DEL PARTIDO</p><div className="barca-match-sheet__score"><span>{article.home}<b>{homeGoals}</b></span><i>FINAL</i><span>{article.away}<b>{awayGoals}</b></span></div><dl><div><dt>Fecha</dt><dd>{article.date}</dd></div><div><dt>Estadio</dt><dd>{article.venue}</dd></div><div><dt>Competición</dt><dd>{article.competition}</dd></div><div><dt>Goles</dt><dd>{article.goals}</dd></div></dl></aside>
         <article className="barca-article__body">{article.body.map((paragraph) => <p key={paragraph.slice(0, 30)}>{paragraph}</p>)}<div className="barca-source"><span>Fuente de datos y referencia</span><a href={article.source} target="_blank" rel="noreferrer">Leer la crónica oficial ↗</a></div></article>
@@ -163,6 +197,6 @@ export default function BarcaBlog() {
     return () => window.removeEventListener('hashchange', handleHash)
   }, [])
   const slug = route.startsWith('#articulo/') ? route.replace('#articulo/', '') : null
-  const article = slug ? articles.find((item) => item.slug === slug) : null
+  const article = slug ? allArticles.find((item) => item.slug === slug) : null
   return article ? <ArticlePage article={article} /> : <HomePage />
 }

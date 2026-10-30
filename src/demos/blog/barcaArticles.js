@@ -31,10 +31,10 @@ export const articles = [
 export const seasonStats = {played:13,wins:11,losses:2,goalsFor:51,goalsAgainst:17}
 
 export const flickEra = {
-  stats: { matches: 129, wins: 99, draws: 10, losses: 20, trophies: 5 },
+  stats: { matches: 130, wins: 99, draws: 10, losses: 21, trophies: 5 },
   seasons: [
-    { season: '2024/25', label: 'EL COMIENZO', title: 'Triplete doméstico y una identidad inmediata', record: 'LaLiga · Copa del Rey · Supercopa', text: 'El primer Barça de Flick terminó con 175 goles, 44 victorias y los tres títulos nacionales. La presión alta, la línea adelantada y la explosión de Lamine Yamal cambiaron el pulso del equipo.', source: 'https://www.fcbarcelona.com/en/football/first-team/news/4265368/hansi-flicks-barca-league-champions' },
-    { season: '2025/26', label: 'LA CONFIRMACIÓN', title: 'Liga revalidada y Camp Nou perfecto', record: 'LaLiga · Supercopa', text: 'El equipo defendió el campeonato, ganó los 19 partidos de Liga en casa y cerró el segundo curso con 116 encuentros dirigidos por Flick y un 75,9% de victorias acumulado.', source: 'https://www.fcbarcelona.com/en/football/first-team/news/4505437/hansi-flicks-records-at-fc-barcelona' },
+    { season: '2024/25', label: 'EL COMIENZO', title: 'Triplete doméstico y una identidad inmediata', record: 'LaLiga · Copa del Rey · Supercopa', text: 'El primer Barça de Flick terminó con 174 goles, 44 victorias y los tres títulos nacionales. La presión alta, la línea adelantada y la explosión de Lamine Yamal cambiaron el pulso del equipo.', source: 'https://www.fcbarcelona.com/en/football/first-team/news/4265368/hansi-flicks-barca-league-champions' },
+    { season: '2025/26', label: 'LA CONFIRMACIÓN', title: 'Liga revalidada y Camp Nou perfecto', record: 'LaLiga · Supercopa', text: 'El equipo defendió el campeonato, ganó los 19 partidos de Liga en casa y terminó su segundo curso con 117 encuentros oficiales acumulados desde el inicio del ciclo.', source: 'https://www.fcbarcelona.com/en/football/first-team/news/4505437/hansi-flicks-records-at-fc-barcelona' },
     { season: '2026/27', label: 'EN CURSO', title: 'Un arranque feroz que ya tiene archivo propio', record: '13 partidos · 51 goles', text: 'Once victorias en los primeros trece encuentros oficiales. Esta portada documenta cada jornada de una temporada todavía abierta, con su crónica, resultado y fuente original.', source: 'https://www.fcbarcelona.com/en/football/first-team/results' },
   ],
   milestones: [
